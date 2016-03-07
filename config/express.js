@@ -10,6 +10,9 @@ module.exports = function(){
 
     var app = express();
 
+    app.use(bodyParser.urlencoded({}));
+    app.use(bodyParser.json());
+
     app.set('views','views');
     app.set('view engine','ejs');
 

@@ -10,7 +10,7 @@ module.exports = function(){
 
     var app = express();
 
-    app.use(bodyParser.urlencoded({}));
+    app.use(bodyParser.urlencoded({extended:true}));
     app.use(bodyParser.json());
 
     app.set('views','views');
@@ -20,6 +20,8 @@ module.exports = function(){
 
 
     require('../app/routes/user.server.routes')(app);
+    require('../app/routes/areas.server.routes')(app);
+    require('../app/routes/archeriesScore.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

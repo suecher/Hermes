@@ -8,12 +8,10 @@ module.exports = function(app){
     app.route('/clublist')
         .post(function(req,res,next){
 
-        })
+        });
 
     app.route('/clubbyid')
         .post(function(req,res,next){
 
-        })
-
-    app.route('/')
-}
+        });
+};

@@ -11,20 +11,22 @@ module.exports = {
     create:function(_createuser,_callback){
         var createuser = _createuser;
         if(createuser.name &&
-            createuser.password &&
-            createuser.username &&
-            createuser.mobile &&
-            createuser.province &&
-            createuser.city &&
-            createuser.defaultArrowRoad &&
-            createuser.defaultArrowCount
-        ){
-            var user = User(createuser);
-            user.save(function(err){
-                if(err){
-                    _callback(resultobjs.createResult(false,'CreateUserError',err.message));
-                    return;
-                }
+                createuser.password &&
+                createuser.username &&
+                createuser.mobile &&
+                createuser.province &&
+                createuser.city &&
+                createuser.defaultArrowRoad &&
+                createuser.defaultArrowCount
+                ){
+
+                var user = User(createuser);
+                user.save(function(err){
+
+                    if(err){
+                        _callback(resultobjs.createResult(false,'CreateUserError',err.message));
+                        return;
+                    }
 
                 _callback(resultobjs.createResult(true,'','',user));
             });

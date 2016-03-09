@@ -10,7 +10,7 @@ var ClupsSchema = new mongoose.Schema({
     address: String, //俱乐部地址
     latlng: String,//坐标
     cperson: String,//内部联系人
-    currency:Number,//货币
+    currency:{type:Number,default:0},//货币
     cphone: String,//联系电话
     phone: String,//箭馆电话
     province: Number,//省份
@@ -19,11 +19,12 @@ var ClupsSchema = new mongoose.Schema({
     summary: String,//介绍信息
     arrowRoadSize: Number,//箭道数量
     houseSize: Number,//场地面积
-    followSize: Number,//关注人数
-    memberSize: Number,//会员数量
+    followSize: {type:Number,default:0},//关注人数
+    memberSize: {type:Number,default:0},//会员数量
     operatorId: String,//操作人
     status: Number,//状态
     picture: String,//箭馆的场馆照片
+    pictureList:[],//图片列表
     wifi: Boolean,//是否有WIFI
     parking: Boolean,//是否有停车场
     multipleShopId:String,//连锁店ID

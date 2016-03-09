@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
     username:String,//用户名
     mobile:String,//手机号码
     password:String,//密码
-    currency:Number,//货币
+    currency:{type:Number,default:0},//货币
     email:String,//邮件
     gender:String,//性别
     status:{type:Number,deault:1},//状态  0.停用 1正常使用 3冻结
@@ -26,7 +26,7 @@ var UserSchema = new mongoose.Schema({
     avgeragePoint:String,//平均环
     totalPoint:String,//总环
     challengeNum:Number, //挑战次数
-    Refusing:Number,//
+    Refusing:Number,//拒绝挑战的次数
     rankPoint:String,//排名成绩
     visibleGrade:Boolean, //是否可以看成绩
     defaultArrowCount:Number,//默认箭数

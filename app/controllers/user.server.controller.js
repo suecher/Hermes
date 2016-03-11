@@ -55,7 +55,7 @@ module.exports = {
     },
     login:function(_userlogin,_callback){
         var userlogin = _userlogin;
-        if(userlogin.mobile && userlogin.password){
+        if(userlogin.username && userlogin.password){
             User.findOne({'username':userlogin.username,'password':userlogin.password},function(err,doc){
 
                 if(err){
@@ -65,7 +65,7 @@ module.exports = {
                 if(doc){
                     _callback(resultobjs.createResult(true,'','',doc));
                 } else {
-                    _callback(resultobjs.createResult(false,'UserNotExist','用户不存在',doc));
+                    _callback(resultobjs.createResult(false,'UserNotExist','用户不存在或者密码错误!',doc));
                 }
             });
         }

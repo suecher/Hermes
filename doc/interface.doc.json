@@ -1,0 +1,119 @@
+请求地址 :http://suecher.vicp.cc:30408/
+
+/areas/province 省份 GET
+/areas/city 城市 GET
+/areas/district 区域 GET
+
+
+//--------------------------------------------------
+/usersignin 注册信息 POST
+{
+"username":"字符串 昵称",
+"name":"字符串 昵称",
+"password":"字符串 密码",
+"mobile":"字符串 手机",
+"province":"省份 整型",
+"city":"城市 整型 ",
+"defaultArrowRoad":"箭道 整型 10/18/30/",
+"defaultArrowCount":"箭组 整型 3/6/12",
+}
+
+//范例
+{
+"username":"18674881901",
+"name":"昵称",
+"password":"123",
+"mobile":"18674881900",
+"province":18,
+"city":177,
+"defaultArrowRoad":18,
+"defaultArrowCount":12
+}
+//--------------------------------------------------
+
+
+/userlogin 登陆 POST
+{
+"username":"字符串 昵称",
+"password":"字符串 密码"
+}
+
+
+/addscore 提交射箭成绩
+{
+"userId":"字符串 用户ID",
+"arrowRoadStandard":"箭道规格 10/18/30",
+"arrowCount":"箭组数量 ",
+"clubId":"字符串 俱乐部ID",
+"avgeragePoint":"平均环数",
+"totalPoint":"整型 总环数",
+"archeryList":"数组 每一箭的环数 [10,10,2,3,1,7,8]",
+"bullseye":"整型 10+ 的次数"
+}
+
+//范例
+{
+"userId":"0001",
+"arrowRoadStandard":"18",
+"arrowCount":"12 ",
+"clubId":"1",
+"totalPoint":90,
+"archeryList":[10,10,2,3,1,7,8,6,8,9,8,7],
+"bullseye":2,
+"avgeragePoint":7.8
+}
+
+
+/clubbycity //根据城市ID获取俱乐部信息 POST
+{
+"cityId":"Int 城市ID"
+}
+
+
+/addclub // 添加俱乐部
+{
+"name":"String 俱乐部名称",
+"address":"String 俱乐部地址",
+"cperson":"String 联系人",
+"cphone":"String 联系人电话",
+"phone":"String 门店电话",
+"province":"Int 省份",
+"city":"Int 城市",
+"district":"Int 区域",
+"arrowRoadSize":"Int 箭道数量",
+"houseSize":"Int 面积"
+}
+
+//添加俱乐部请求样式 POST
+{
+"name":"A1箭馆",
+"address":"人民东路融圣国际6栋",
+"cperson":"舒先生",
+"cphone":"18674881901",
+"phone":"18674881901",
+"province":18,
+"city":177,
+"district":1556,
+"arrowRoadSize":12,
+"houseSize":400
+}
+
+/addfriend 添加好友信息
+{
+"userId":"0001",
+"friendId":"0002"
+}
+
+
+/getfriends 根据ID获取好友信息 返回好友的ID列表
+{
+"userId":"0001"
+}
+
+/返回结构
+{
+"result":"Boolean",
+"errorType":"String",
+"errprMessage":"String",
+"body":{"JSON Object"}
+}

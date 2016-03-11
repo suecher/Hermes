@@ -3,9 +3,6 @@
  */
 
 
-
-
-
 var ArcheriesScoreController = require('../controllers/archeriesScore.server.controller');
 
 

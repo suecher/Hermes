@@ -19,4 +19,4 @@ module.exports = function(app){
         .get(function(req,res,next){
             res.json(areas.district);
         })
-}
+};

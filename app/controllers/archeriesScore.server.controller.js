@@ -10,18 +10,15 @@ var resultobjs = require('../models/result.server.model');
 
 module.exports = {
     create: function(_createscore, _callback) {
-
         var clientscore =_createscore;
-
-        console.log(clientscore);
 
         if(clientscore.userId &&
             clientscore.arrowRoadStandard &&
             clientscore.arrowCount &&
-            clientscore.clubId &&
             clientscore.totalPoint &&
             clientscore.avgeragePoint &&
-            clientscore.archeryList){
+            clientscore.archeryList &&
+            clientscore.bullseye){
 
             var score = ArcheriesScore(clientscore);
 
@@ -39,6 +36,20 @@ module.exports = {
 
         } else {
             _callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
+            return;
+        }
+    },
+    scoreByUser:function(userId,callback){
+        if(userId){
+            ArcheriesScore.find({"userId":userId},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectScoreByUserInfoError',err.message));
+                }
+
+                callback(resultobjs.createResult(true,null,null,docs));
+            });
+        }else{
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
             return;
         }
     }

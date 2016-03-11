@@ -10,8 +10,21 @@ module.exports = function(app){
 
         });
 
-    app.route('/clubbyid')
+    app.route('/clubbycity')
+        .post(function(req,res,next){
+            var cityId =req.body.cityId;
+
+            ClubControllers.listByCity(cityId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
+    app.route('/addclub')
         .post(function(req,res,next){
 
+            var clientclub = req.body;
+            ClubControllers.create(clientclub,function(resultobjs){
+                res.json(resultobjs);
+            });
         });
 };

@@ -9,6 +9,6 @@ module.exports = function(){
     require('../app/models/user.server.model');
     require('../app/models/archeriesscore.server.model');
     require('../app/models/club.server.model');
-
+    require('../app/models/friend.server.model');
     return db;
 };

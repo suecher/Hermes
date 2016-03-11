@@ -4,7 +4,7 @@
 "use strict";
 
 var mongoose = require('mongoose');
-var Club = require('../models/club.server.controller');
+var Clups = mongoose.model('Clups');
 
 var resultobjs = require('../models/result.server.model');
 
@@ -21,7 +21,8 @@ module.exports = {
         clientClub.arrowRoadSize &&
         clientClub.houseSize
         ){
-            var club = Club(clientClub);
+            console.log(clientClub);
+            var club = Clups(clientClub);
             club.save(function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'AddClubError',err.message));
@@ -38,18 +39,17 @@ module.exports = {
     listByCity:function(cityId,callback){
         if(cityId){
 
-            Club.find({'city':cityId},function(err,docs){
+            Clups.find({'city':cityId},function(err,docs){
                 if(err){
-                    callback(resultobjs.createResult(resultobjs.createResult(false,'Select club error',err.message)));
+                    callback(resultobjs.createResult(false,'Select club error',err.message));
                     return;
                 }
 
-                callback(resultobjs.createResult(resultobjs.createResult(true,'','',docs)));
+                callback(resultobjs.createResult(true,'','',docs));
             });
 
         }else{
-            callback(resultobjs.createResult(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID')));
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
     }
-
 };

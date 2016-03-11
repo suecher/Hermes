@@ -21,7 +21,10 @@ module.exports = function(){
 
     require('../app/routes/user.server.routes')(app);
     require('../app/routes/areas.server.routes')(app);
+    require('../app/routes/club.server.routes')(app);
     require('../app/routes/archeriesScore.server.routes')(app);
+    require('../app/routes/friend.server.routes')(app);
+
 
     app.use(function(req,res,next){
         res.status(404);

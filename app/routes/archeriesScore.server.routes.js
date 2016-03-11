@@ -17,4 +17,12 @@ module.exports = function(app){
             });
 
         });
+
+    app.route('/scoreByUser')
+        .post(function(req,res,next){
+            ArcheriesScoreController.scoreByUser(req.body.userId,function(resultobjes){
+                res.json(resultobjes);
+            });
+
+        });
 };

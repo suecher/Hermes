@@ -35,6 +35,24 @@ module.exports = {
             _callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,用户名,密码,手机或者省份,城市'));
         }
     },
+    userById:function(userId,callback){
+        if(userId){
+
+            User.findOne({'_id':userId},function(err,doc){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectUserError',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,'','',doc));
+            })
+
+        }
+        else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
+            return;
+        }
+    },
     login:function(_userlogin,_callback){
         var userlogin = _userlogin;
         if(userlogin.mobile && userlogin.password){

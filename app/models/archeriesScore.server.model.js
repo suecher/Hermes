@@ -11,7 +11,9 @@ var ArcheriesScoreSchema = new mongoose.Schema({
     clubId:String,//俱乐部ID
     picture:String,//射箭结果图片
     avgeragePoint:Number,//平均环数
-    totalPoint:Number,//总环数
+    totalPoint:Number,//总环数,
+    equipType:Number,//弓类型
+    equipId:String,//我的装备ID
     bullseye:{type:Number,default:0},//射中靶心数
     createTime:{type:Date,deault:Date.now()},//记录创建时间
     archeryList:Object,//每一箭的环数

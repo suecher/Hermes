@@ -66,7 +66,11 @@
 
 /clubbycity //根据城市ID获取俱乐部信息 POST
 {
-"cityId":"Int 城市ID"
+  "cityId":"Int 城市ID",
+  "pagination" : {
+    "pageNo": 1, // 页码，如果不传，则默认查询第一页
+    "numPerPage": 1  //每页显示记录数
+  }
 }
 
 
@@ -116,4 +120,14 @@
 "errorType":"String",
 "errprMessage":"String",
 "body":{"JSON Object"}
+}
+
+
+//List获取的分页结构
+{
+  "cityId":"177",
+  "pagination":{
+    "numPerPage":10, //单页数据
+    "pageNo":1 //页码
+  }
 }

@@ -10,5 +10,7 @@ module.exports = function(){
     require('../app/models/archeriesscore.server.model');
     require('../app/models/club.server.model');
     require('../app/models/friend.server.model');
+    require('../app/models/honorbyuser.server.model.js');
+    require('../app/models/message.server.model.js');
     return db;
 };

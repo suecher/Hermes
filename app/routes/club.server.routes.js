@@ -13,18 +13,23 @@ module.exports = function(app){
     app.route('/clubbycity')
         .post(function(req,res,next){
             var cityId =req.body.cityId;
+            var pagination = req.body.pagination;
 
-            ClubControllers.listByCity(cityId,function(resultobjs){
+            ClubControllers.listByCity(cityId,pagination,function(resultobjs){
                 res.json(resultobjs);
             });
         });
 
+
+
     app.route('/addclub')
         .post(function(req,res,next){
-
             var clientclub = req.body;
             ClubControllers.create(clientclub,function(resultobjs){
                 res.json(resultobjs);
             });
         });
+
+
+
 };

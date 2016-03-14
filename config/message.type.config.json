@@ -1,0 +1,18 @@
+[
+  {
+    "Id":1,
+    "messageTypeName":"用户消息"
+  },
+  {
+    "Id":2,
+    "messageTypeName":"箭馆通知"
+  },
+  {
+    "Id":3,
+    "messageTypeName":"平台消息"
+  },
+  {
+    "Id":4,
+    "messageTypeName":"活动消息"
+  }
+]

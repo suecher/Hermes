@@ -6,7 +6,8 @@ var mongoose = require('mongoose');
 
 var FriendSchema = new mongoose.Schema({
     userId:String,
-    friendId:String
+    friendId:String,
+    createTime:{Type:Date,default:Date.now()}
 });
 
 

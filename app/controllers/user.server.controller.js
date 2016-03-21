@@ -35,9 +35,28 @@ module.exports = {
             _callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,用户名,密码,手机或者省份,城市'));
         }
     },
+    //更新用户的成绩部分
+    updatescore_server:function(userId,scoreObj,callback){
+        if(userId &&
+        scoreObj.totalPoint &&
+        scoreObj.arrowCount){
+
+            User.update({_id:userId},{$inc:{'totalPoint':scoreObj.totalPoint,'arrowCount':scoreObj.arrowCount}},function(err,data){
+                if(err){
+                    callback(resultobjs.createResult(false,'UpdateUserScore',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,'','',data));
+            })
+
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少成绩对象或是用户ID'));
+            return;
+        }
+    },
     userById:function(userId,callback){
         if(userId){
-
             User.findOne({'_id':userId},function(err,doc){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectUserError',err.message));
@@ -55,6 +74,7 @@ module.exports = {
     },
     login:function(_userlogin,_callback){
         var userlogin = _userlogin;
+        console.log(userlogin);
         if(userlogin.username && userlogin.password){
             User.findOne({'username':userlogin.username,'password':userlogin.password},function(err,doc){
 

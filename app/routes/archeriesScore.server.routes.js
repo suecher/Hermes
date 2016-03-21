@@ -9,10 +9,11 @@ var ArcheriesScoreController = require('../controllers/archeriesScore.server.con
 module.exports = function(app){
     app.route('/addscore')
         .post(function(req,res,next){
-            ArcheriesScoreController.create(req.body,function(resultobjs){
-                res.json(resultobjs);
-            });
-
+            console.log(req.body);
+            //ArcheriesScoreController.create(req.body,function(resultobjs){
+            //    res.json(resultobjs);
+            //});
+            res.send('提交成功');
         });
 
     app.route('/scoreByUser')
@@ -20,6 +21,5 @@ module.exports = function(app){
             ArcheriesScoreController.scoreByUser(req.body.userId,function(resultobjes){
                 res.json(resultobjes);
             });
-
         });
 };

@@ -5,7 +5,7 @@
 
 var mongoose = require('mongoose');
 var ArcheriesScore = mongoose.model("ArcheriesScore");
-
+var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
             clientscore.arrowCount &&
             clientscore.totalPoint &&
             clientscore.avgeragePoint &&
-            clientscore.archeryList &&
+            //clientscore.archeryList &&
             clientscore.bullseye){
 
             var score = ArcheriesScore(clientscore);
@@ -31,7 +31,15 @@ module.exports = {
                     return;
                 }
 
+                //UserController.updatescore_server(clientscore.userId,{totalPoint:clientscore.totalPoint,arrowCount:clientscore.arrowCount},function(scoreresult){
                 _callback(resultobjs.createResult(true,'','',score));
+                //    if(scoreresult.result){
+                //        _callback(resultobjs.createResult(true,'','',score));
+                //    } else {
+                //        _callback(resultobjs.createResult(false,scoreresult.errorType,scoreresult.errprMessage));
+                //    }
+                //});
+
             });
 
         } else {
@@ -52,5 +60,8 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
             return;
         }
+    },
+    scoreByClubRank:function(clubId){
+
     }
 }

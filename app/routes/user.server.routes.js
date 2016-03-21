@@ -19,6 +19,13 @@ module.exports = function(app){
             });
         });
 
+    app.route('/userbyid')
+        .post(function(req,res,next){
+            UserController.userById(req.body.userId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
     app.route('/friendbyuserId')
         .post(function(req,res){
             UserController.userById(req.body.userId,function(resultobjs){

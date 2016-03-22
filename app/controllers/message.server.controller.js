@@ -46,8 +46,8 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,发送人ID,接收人ID'));
         }
     },
-    messageByreceiveIdAndMessageType:function(receiven,messageType,callback){
-        if(receiven && messageType){
+    messageByreceiveIdAndMessageType:function(receiveId,messageType,callback){
+        if(receiveId && messageType){
 
             Message.find({"receiveId":receiveId,messageType:messageType},function(err,docs){
                 if(err){

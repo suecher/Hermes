@@ -13,6 +13,7 @@ var MessageSchema = new mongoose.Schema({
     messageUrl:String, // 消息URL
     messagePic:[], // 消息图片序列
     body:Object, // 消息结构体 比如挑战,投票等.
+    read:Boolean,//是否阅读
     createTime:{type:Date,default:Date.now()} //消息创建的时间
 });
 

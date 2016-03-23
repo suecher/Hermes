@@ -4,12 +4,23 @@
 
 
 module.exports = {
-    createResult:function(_result,_errorType,_errprMessage,_body){
+    /**
+    * @description 返回结构
+     * @param {Boolean.返回的结果是否是正确的} result
+     * 返回的结果是否是正确的
+     *@param {String.错误的类型} errorType
+     * 错误的类型
+     * @param {String.错误的内容} errorMessage
+     * 错误的内容
+     * @param {Object.成功后返回的结构信息.} body
+     * 成功后返回的结构信息.
+    **/
+    createResult:function(result,errorType,errorMessage,body){
         var resultObj = {};
-        resultObj.result = _result;
-        resultObj.errorType = _errorType;
-        resultObj.errprMessage = _errprMessage;
-        resultObj.body = _body;
+        resultObj.result = result;
+        resultObj.errorType = errorType;
+        resultObj.errprMessage = error;
+        resultObj.body = body;
         return resultObj;
     }
 };

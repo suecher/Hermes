@@ -3,5 +3,7 @@
  */
 module.exports = {
     port:7105,
-    mongodb:'mongodb://localhost/hermes'
+    mongodb:'mongodb://localhost/hermes',
+    usersPicture:'./public/files/users/',
+    clubsPicture:'./public/files/clubs/'
 };

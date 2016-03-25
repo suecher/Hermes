@@ -15,8 +15,8 @@ module.exports = {
         if(clientMessage.sendId &&
         clientMessage.receiveId &&
         clientMessage.content &&
-        clientMessage.MessageType){
-            var message = Message.model(clientMessage);
+        clientMessage.messageType){
+            var message = Message(clientMessage);
 
             message.save(function(err){
                 if(err){
@@ -59,6 +59,22 @@ module.exports = {
             });
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,发送人ID,消息类型'));
+        }
+    },
+    messageListByUserId:function(sendId,callback){
+        if(sendId){
+            Message.find({sendId:sendId})
+                .sort('createTime')
+                .exec(function(err,docs){
+                    if(err){
+                        callback(resultobjs.createResult(false,'Select.Message.Database.Error',err.message));
+                        return;
+                    }
+
+                    callback(resultobjs.createResult(true,null,null,docs));
+                });
+        }else{
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息'));
         }
     }
 }

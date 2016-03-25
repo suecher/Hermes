@@ -19,7 +19,7 @@ module.exports = {
         var resultObj = {};
         resultObj.result = result;
         resultObj.errorType = errorType;
-        resultObj.errprMessage = error;
+        resultObj.errprMessage = errorMessage;
         resultObj.body = body;
         return resultObj;
     }

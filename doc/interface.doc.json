@@ -119,6 +119,29 @@
   "userId":"0001"
 }
 
+
+//createmessage
+{
+  "sendId":String, //用户ID
+  "receiveId":String, //接收者ID
+  "content":String,
+  "messageType":Int //消息类型 //1.用户消息 2.是平台消息 3.俱乐部消息 4.挑战消息 5.投票消息
+}
+
+
+//getmessage
+{
+  "sendId":String, //用户ID
+  "receiveId":String //接收者ID
+}
+
+//messagelistbyuserid
+{
+  "sendId":String //用户ID
+}
+
+
+//公共结构体
 /返回结构
 {
   "result":"Boolean",

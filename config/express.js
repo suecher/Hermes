@@ -16,15 +16,15 @@ module.exports = function(){
     app.set('views','views');
     app.set('view engine','ejs');
 
-    app.use(express.static('./public'));
-
+    app.use(express.static('../public'));
 
     require('../app/routes/user.server.routes')(app);
     require('../app/routes/areas.server.routes')(app);
     require('../app/routes/club.server.routes')(app);
     require('../app/routes/archeriesScore.server.routes')(app);
     require('../app/routes/friend.server.routes')(app);
-
+    require('../app/routes/uploadfiles.server.routes')(app);
+    require('../app/routes/message.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

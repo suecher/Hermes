@@ -1,6 +1,6 @@
 /**
- * Created by Administrator on 2016/3/11.
- */
+* Created by Administrator on 2016/3/11.
+*/
 [
     {
         "bowTypeId":1,

@@ -11,10 +11,10 @@ module.exports = {
     create:function(clicentUserHonor,callback){
         if(clicentUserHonor.honorType &&
             clicentUserHonor.honorId &&
-            clientUserHonor.userId
+            clicentUserHonor.userId
           ){
-            var honor = HonorByUser.model(clicentUserHonor);
 
+            var honor = HonorByUser(clicentUserHonor);
             honor.save(function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'AddHonorError',err.message));

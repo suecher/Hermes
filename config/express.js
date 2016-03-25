@@ -25,6 +25,7 @@ module.exports = function(){
     require('../app/routes/friend.server.routes')(app);
     require('../app/routes/uploadfiles.server.routes')(app);
     require('../app/routes/message.server.routes')(app);
+    require('../app/routes/honor.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

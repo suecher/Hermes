@@ -61,9 +61,25 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,发送人ID,消息类型'));
         }
     },
-    messageListByUserId:function(sendId,callback){
+    messageListByReceiveId:function(receiveId,callback){
+        if(receiveId){
+            Message.find({receiveId:receiveId})
+                .sort('createTime')
+                .exec(function(err,docs){
+                    if(err){
+                        callback(resultobjs.createResult(false,'Select.Message.Database.Error',err.message));
+                        return;
+                    }
+
+                    callback(resultobjs.createResult(true,null,null,docs));
+                });
+        }else{
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息'));
+        }
+    },
+    messageListBySendId:function(sendId,callback){
         if(sendId){
-            Message.find({sendId:sendId})
+            Message.find({receiveId:sendId})
                 .sort('createTime')
                 .exec(function(err,docs){
                     if(err){

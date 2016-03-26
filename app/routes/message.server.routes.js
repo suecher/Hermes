@@ -22,11 +22,19 @@ module.exports = function(app){
             });
         });
 
-    app.route('/messagelistbyuserid')
+    app.route('/messagelistbysendId')
         .post(function(req,res){
-            MessageController.messageListByUserId(req.body.sendId,function(resultobjs){
+            MessageController.messageListBySendId(req.body.sendId,function(resultobjs){
                 res.json(resultobjs);
             });
         });
+
+    app.route('/messagelistbyreceiveid')
+        .post(function(req,res){
+            MessageController.messageListByReceiveId(req.body.receiveId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
 }
 

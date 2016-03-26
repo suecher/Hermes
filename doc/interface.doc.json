@@ -137,7 +137,7 @@
 
 //messagelistbyuserid
 {
-  "sendId":String //用户ID
+  "receiveId":String //用户ID
 }
 
 

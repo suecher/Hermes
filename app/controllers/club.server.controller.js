@@ -22,6 +22,7 @@ module.exports = {
         clientClub.houseSize
         ){
             var club = Clups(clientClub);
+
             club.save(function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'AddClubError',err.message));

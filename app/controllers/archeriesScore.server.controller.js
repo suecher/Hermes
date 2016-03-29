@@ -7,9 +7,11 @@ var mongoose = require('mongoose');
 var ArcheriesScore = mongoose.model("ArcheriesScore");
 var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
+var fs = require('fs');
+var config = require('../../config/config');
 
 module.exports = {
-    create: function(_createscore, _callback) {
+    create: function(_createscore, callback) {
         var clientscore =_createscore;
 
         if(clientscore.userId &&
@@ -18,7 +20,8 @@ module.exports = {
             clientscore.totalPoint &&
             clientscore.avgeragePoint &&
             //clientscore.archeryList &&
-            clientscore.bullseye){
+            clientscore.bullseye &&
+            clientscore.picture){
 
             var score = ArcheriesScore(clientscore);
 
@@ -27,23 +30,28 @@ module.exports = {
 
             score.save(function(err){
                 if(err){
-                    _callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
+                    callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
                     return;
                 }
 
                 //UserController.updatescore_server(clientscore.userId,{totalPoint:clientscore.totalPoint,arrowCount:clientscore.arrowCount},function(scoreresult){
-                _callback(resultobjs.createResult(true,'','',score));
+                callback(resultobjs.createResult(true,'','',score));
+
+                //判断是否有图片
+                if(clientscore.picture){
+                    var folder_exists = fs.existsSync(config.tempfolder);
+                }
+
                 //    if(scoreresult.result){
                 //        _callback(resultobjs.createResult(true,'','',score));
                 //    } else {
                 //        _callback(resultobjs.createResult(false,scoreresult.errorType,scoreresult.errprMessage));
                 //    }
                 //});
-
             });
 
         } else {
-            _callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
             return;
         }
     },

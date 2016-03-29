@@ -10,7 +10,7 @@ var fs = require('fs');
 var path = require('path');
 var uuid = require('node-uuid');
 
-var userpath = config.tempfolder;
+var userpath = __dirname + config.tempfolder;
 
 module.exports = {
      /**
@@ -30,7 +30,7 @@ module.exports = {
 
         var form = new multiparty.Form({uploadDir:userpath});
             form.maxFilesSize = 2 * 1024 * 1024;
-            form.uploadDir = "../public/files/temp";
+            form.uploadDir = userpath;
             form.parse(req,function(err,filds,files){
 
             var filesTmp = JSON.stringify(files,null,2);
@@ -65,7 +65,6 @@ module.exports = {
                 } else {
                     callback(resultobj.createResult(false,'Content-Disposition.SetError.','Content-Disposition设置错误name=inputFile'));
                 }
-
             };
         });
     }

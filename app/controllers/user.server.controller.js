@@ -48,7 +48,7 @@ module.exports = {
                 }
 
                 callback(resultobjs.createResult(true,'','',data));
-            })
+            });
 
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少成绩对象或是用户ID'));
@@ -93,6 +93,42 @@ module.exports = {
         {
             _callback(resultobjs.createResult(false,'Required parameter missing','缺少用户名或者密码'));
 
+        }
+    },
+    update:function(clientuser,callback){
+        //需要测试
+        if(clientuser.password &&
+            clientuser.province &&
+            clientuser.city &&
+            clientuser.email &&
+            clientuser.picture &&
+            clientuser.clubId &&
+            clientuser.arrowCount &&
+            clientuser.defaultArrowCount &&
+            clientuser.defaultArrowRoad
+        ) {
+            User.update({_id: clientuser.userId}, {
+                $set: {
+                    'totalPoint': clientuser.password,
+                    'province': clientuser.province,
+                    'city': clientuser.city,
+                    'email': clientuser.email,
+                    'picture': clientuser.picture,
+                    'clubId': clientuser.clubId,
+                    'arrowCount': clientuser.arrowCount,
+                    'defaultArrowCount': clientuser.defaultArrowCount,
+                    'defaultArrowRoad': clientuser.defaultArrowRoad
+                }
+            }, function (err, data) {
+                if (err) {
+                    callback(resultobjs.createResult(false, 'UpdateUserScore', err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true, '', '', data));
+            });
+        } else {
+            _callback(resultobjs.createResult(false,'Required parameter missing','缺少用户名或者密码'));
         }
     },
     list:function(req,res,next){

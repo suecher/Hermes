@@ -16,6 +16,7 @@ var ClupsSchema = new mongoose.Schema({
     province: Number,//省份
     city: Number,//城市
     district:Number,//城市地区
+    logo:{type:String,default:""},//LOGO地址
     summary: String,//介绍信息
     arrowRoadSize: Number,//箭道数量
     houseSize: Number,//场地面积
@@ -23,9 +24,9 @@ var ClupsSchema = new mongoose.Schema({
     memberSize: {type:Number,default:0},//会员数量
     operatorId: String,//操作人
     status: {type:Number,default:1},//状态 //0关闭 1开业 2停业
-    picture: String,//箭馆的场馆照片
+    picture: {type:Boolean,default:false},//箭馆的场馆照片
     pictureList:[],//图片列表
-    wifi: Boolean,//是否有WIFI
+    wifi: {type:Boolean,default:false},//是否有WIFI
     parking: Boolean,//是否有停车场
     multipleShopId:String,//连锁店ID
     multipleBit:Boolean,//是否是连锁店

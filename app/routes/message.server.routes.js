@@ -15,7 +15,6 @@ module.exports = function(app){
 
     app.route('/getmessage')
         .post(function(req,res){
-
             var clientmessage = req.body;
             MessageController.messageByreceiveIdAndsendId(clientmessage.receiveId,clientmessage.sendId,function(resultobjs){
                 res.json(resultobjs);
@@ -35,6 +34,6 @@ module.exports = function(app){
                 res.json(resultobjs);
             });
         });
+};
 
-}
 

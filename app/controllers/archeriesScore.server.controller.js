@@ -55,16 +55,47 @@ module.exports = {
             return;
         }
     },
-    scoreByUser:function(userId,callback){
+    scoreByUserAndDate:function(userId,startdate,enddate,callback){
         if(userId){
-            ArcheriesScore.find({"userId":userId},function(err,docs){
+            ArcheriesScore.find({
+                "userId":userId,
+                "createTime":{
+                    "$gte": new Date(startdate),
+                    "$lt":new Date(enddate)}},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectScoreByUserInfoError',err.message));
                 }
 
-                callback(resultobjs.createResult(true,null,null,docs));
+                //格式化对象 计算最终的数据
+                let scorelistobj = {};
+
+                for(let item in docs){
+                    if(docs[item].createTime.getDate() in scorelistobj){
+                        scorelistobj[docs[item].createTime.getDate()].push(docs[item]);
+                    } else {
+                        scorelistobj[docs[item].createTime.getDate()] = [docs[item]];
+                    }
+                };
+
+                let scorelistarr = [];
+
+                for(let item in scorelistobj){
+                    let totalPoint = 0;
+                    //scorelistobj[item].archeryList.map((n) => totalPoint + n);
+
+                    for(let scoreItem in scorelistobj[item]){
+                        scorelistobj[item][scoreItem].archeryList.map((n) => totalPoint = totalPoint + n);
+                        //console.log(scorelistobj[item][scoreItem].archeryList);
+                    }
+
+                    scorelistarr.push({groupCount:scorelistobj[item].length,totalPoint:totalPoint,list:scorelistobj[item]});
+                }
+
+                console.log(scorelistarr);
+
+                callback(resultobjs.createResult(true,null,null,scorelistarr));
             });
-        }else{
+        } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
             return;
         }

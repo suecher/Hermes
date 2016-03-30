@@ -20,6 +20,14 @@ module.exports = function(app){
             });
         });
 
+    app.route('/clubbyid')
+        .post(function(req,res){
+            var clubId = req.body.clubId;
+            ClubControllers.clubById(clubId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
 
 
     app.route('/addclub')

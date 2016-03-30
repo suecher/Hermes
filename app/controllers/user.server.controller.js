@@ -57,7 +57,7 @@ module.exports = {
     },
     userById:function(userId,callback){
         if(userId){
-            User.findOne({'_id':userId},function(err,doc){
+            User.findOne({'_id':userId},{password:0},function(err,doc){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectUserError',err.message));
                     return;

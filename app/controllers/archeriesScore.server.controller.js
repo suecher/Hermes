@@ -98,7 +98,7 @@ module.exports = {
             ){
 
             //在哪个俱乐部射的。就属于哪个俱乐部的成绩
-            ArcheriesScore.find({_id:clubrank.clubId,arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
+            ArcheriesScore.find({clubId:clubrank.clubId,arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'ClubRankSelectError','查询出错'));
                     return;
@@ -114,7 +114,26 @@ module.exports = {
                     }
                 };
 
-                console.log();
+                var clubscoreList = [];
+
+                for(let useritem in clubuser){
+                    var totalpoint = 0;
+                    var arrowcount = 0;
+
+                    for(let scoreItem in clubuser[useritem]){
+                        totalpoint = totalpoint + clubuser[useritem][scoreItem].totalPoint;
+                        arrowcount = arrowcount + clubuser[useritem][scoreItem].arrowCount;
+                    }
+
+                    let avgerage = totalpoint/clubuser[useritem].length+(arrowcount * 0.02); //计算积分
+                    let avgeragePoint = totalpoint/(clubuser[useritem].length * clubrank.arrowCount); //计算平均环数
+
+                    clubscoreList.push({userId:useritem,point:avgerage,arrowCount:avgeragePoint});
+                }
+
+                //console.log(clubscoreList);
+                callback(resultobjs.createResult(true,null,null,clubscoreList));
+
             });
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,clubId or arrowRoad or arrowCount'));

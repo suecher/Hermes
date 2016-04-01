@@ -25,4 +25,15 @@ module.exports = function(app){
             });
         });
 
+
+    app.route('/rankingbyclub')
+        .post(function(req,res){
+            let clubrank = req.body;
+            ArcheriesScoreController.scoreByClubRank(clubrank,function(resultobjes){
+                res.json(resultobjes);
+            });
+        });
+
+    app.route('/')
+
 };

@@ -6,5 +6,6 @@ module.exports = {
     mongodb:'mongodb://localhost/hermes',
     usersPicture:'/public/files/users/',
     clubsPicture:'/public/files/clubs/',
-    tempfolder:'/public/files/temp/'
+    tempfolder:'/public/files/temp/',
+    coefficient:0.02
 };

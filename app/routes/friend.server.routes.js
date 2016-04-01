@@ -11,13 +11,12 @@ module.exports = function(app){
             FriendController.create(req.body,function(resultobjs){
                 res.json(resultobjs);
             });
-
         });
 
     app.route('/getfriends')
         .post(function(req,res){
             FriendController.getfriend(req.body.userId,function(resultobjs){
                 res.json(resultobjs);
-            })
+            });
         });
 }

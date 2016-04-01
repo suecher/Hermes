@@ -92,5 +92,19 @@ module.exports = {
         }else{
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息'));
         }
+    },
+    messageRemove:function(messageId,callback){
+        if(messageId){
+            Message.remove({"_id":messageId},function(err){
+                if(err){
+                    callback(resultobjs.createResult(false,'RemoveMessageError','缺少必要的信息,MessageID'));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,null,null));
+            });
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息,MessageID'));
+        }
     }
 }

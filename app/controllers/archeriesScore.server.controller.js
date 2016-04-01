@@ -22,12 +22,9 @@ module.exports = {
             //clientscore.archeryList &&
             clientscore.bullseye &&
             clientscore.picture){
-
             var score = ArcheriesScore(clientscore);
-
             score.isAffirmOver = false;
             score.isAffirm = true;
-
             score.save(function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
@@ -81,26 +78,46 @@ module.exports = {
 
                 for(let item in scorelistobj){
                     let totalPoint = 0;
-                    //scorelistobj[item].archeryList.map((n) => totalPoint + n);
-
                     for(let scoreItem in scorelistobj[item]){
                         scorelistobj[item][scoreItem].archeryList.map((n) => totalPoint = totalPoint + n);
-                        //console.log(scorelistobj[item][scoreItem].archeryList);
                     }
 
-                    scorelistarr.push({groupCount:scorelistobj[item].length,totalPoint:totalPoint,list:scorelistobj[item]});
+                    scorelistarr.push({groupCount:scorelistobj[item].length,totalPoint:totalPoint,list:scorelistobj[item],date:item});
                 }
-
-                console.log(scorelistarr);
-
+                //console.log(scorelistarr);
                 callback(resultobjs.createResult(true,null,null,scorelistarr));
             });
         } else {
-            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
-            return;
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,userId'));
         }
     },
-    scoreByClubRank:function(clubId){
+    scoreByClubRank:function(clubrank,callback){
+        if(clubrank.clubId &&
+            clubrank.arrowRoad &&
+            clubrank.arrowCount
+            ){
 
+            //在哪个俱乐部射的。就属于哪个俱乐部的成绩
+            ArcheriesScore.find({_id:clubrank.clubId,arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'ClubRankSelectError','查询出错'));
+                    return;
+                }
+
+                //clubuser 将成绩分类到每个俱乐部的成员对象中
+                let clubuser = {};
+                for(let scoreItem in docs){
+                    if(docs[scoreItem].userId in clubuser){
+                        clubuser[docs[scoreItem].userId].push(docs[scoreItem]);
+                    } else {
+                        clubuser[docs[scoreItem].userId] = [docs[scoreItem]];
+                    }
+                };
+
+                console.log();
+            });
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,clubId or arrowRoad or arrowCount'));
+        }
     }
-}
+};

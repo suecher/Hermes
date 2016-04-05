@@ -62,7 +62,6 @@ module.exports = {
         }
 
         if(cityId){
-
             Clups.find({'city':cityId})
                 .skip((pagestart - 1) * pagesize)
                 .limit(pagesize)

@@ -13,10 +13,8 @@ module.exports = {
     create:function(client,callback){
         if(client.userId && client.friendId){
             var friend = Friend();
-
             friend.userId = client.userId;
             friend.friendId = client.friendId;
-
             friend.save(function(err){
                 callback(resultobjs.createResult(true,'','',friend));
                 return;

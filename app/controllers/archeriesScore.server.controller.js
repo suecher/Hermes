@@ -92,13 +92,13 @@ module.exports = {
         }
     },
     scoreByClubRank:function(clubrank,callback){
-        if(clubrank.clubId &&
+        if(clubrank.clubIdList &&
             clubrank.arrowRoad &&
             clubrank.arrowCount
             ){
 
             //在哪个俱乐部射的。就属于哪个俱乐部的成绩
-            ArcheriesScore.find({clubId:clubrank.clubId,arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
+            ArcheriesScore.find({clubId:{"$in":clubrank.clubIdList},arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'ClubRankSelectError','查询出错'));
                     return;

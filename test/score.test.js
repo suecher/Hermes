@@ -6,19 +6,20 @@
 
 var config = require('../config/config.js');
 var mongodb = require('../config/mongoose');
-var db = mongodb();
+
+//var db = mongodb();
 
 var mongoose = require('mongoose');
+mongoose.connect("mongodb://121.43.57.99/hermes");
+require('../app/models/archeriesscore.server.model');
+require('../app/models/user.server.model');
 var ArcheriesScore = mongoose.model("ArcheriesScore");
 
 
 var ArcheriesScoreController = require('../app/controllers/archeriesScore.server.controller');
 
 
-ArcheriesScoreController.scoreByClubRank({"clubId":1,"arrowRoad":10,"arrowCount":12},function(resultobj){
-
-
-
+ArcheriesScoreController.scoreByClubRank({"clubIdList":['56fe9c2b7fc2a9dc0de5f8d8'],"arrowRoad":10,"arrowCount":12},function(resultobj){
 
     console.log(resultobj);
 });

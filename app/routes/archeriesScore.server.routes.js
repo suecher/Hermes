@@ -28,12 +28,34 @@ module.exports = function(app){
 
     app.route('/rankingbyclub')
         .post(function(req,res){
-            let clubrank = req.body;
-            ArcheriesScoreController.scoreByClubRank(clubrank,function(resultobjes){
-                res.json(resultobjes);
-            });
+            if(req.body.clubId &&
+                req.body.arrowRoad &&
+                req.arrowCount) {
+                let clubrank = {};
+                clubrank.clubIdList = [req.body.clubId];
+                clubrank.arrowRoad = req.body.arrowRoad;
+                clubrank.arrowCount = req.body.arrowCount;
+                ArcheriesScoreController.scoreByClubRank(clubrank, function (resultobjes) {
+                    res.json(resultobjes);
+                });
+            } else {
+                res.json({result:false,errorType:'',errorMessage:'缺少必要参数'});
+            }
         });
 
-    app.route('/')
 
+    app.route('/rankingbycity')
+        .post(function(req,res){
+            if(req.body.cityId &&
+                req.body.arrowRoad &&
+                req.arrowCount){
+
+                let cityrank = {};
+                cityrank.cityId = req.body.cityId;
+                res.send('成功');
+
+            } else {
+                res.json({result:false,errorType:'',errorMessage:'缺少必要参数'});
+            }
+        });
 };

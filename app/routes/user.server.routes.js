@@ -19,6 +19,15 @@ module.exports = function(app){
             });
         });
 
+
+    app.route('/userupdate')
+        .post(function(req,res){
+            var clientuser = req.body;
+            UserController.update(clientuser,function(resultobj){
+                res.json(resultobj);
+            });
+        });
+
     app.route('/userbyid')
         .post(function(req,res,next){
             UserController.userById(req.body.userId,function(resultobjs){
@@ -35,4 +44,10 @@ module.exports = function(app){
 
     app.route('/userfriends')
         .post(UserController.list);
+
+    app.route('/test')
+        .get(function(req,res){
+            var config = require('../../config/config');
+            console.log(__dirname + config.tempfolder);
+        });
 };

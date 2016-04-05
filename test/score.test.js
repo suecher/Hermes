@@ -19,7 +19,12 @@ var ArcheriesScore = mongoose.model("ArcheriesScore");
 var ArcheriesScoreController = require('../app/controllers/archeriesScore.server.controller');
 
 
-ArcheriesScoreController.scoreByClubRank({"clubIdList":['56fe9c2b7fc2a9dc0de5f8d8'],"arrowRoad":10,"arrowCount":12},function(resultobj){
 
+ArcheriesScoreController.scoreByClubRank({"clubIdList":['56fe9c2b7fc2a9dc0de5f8d8'],"arrowRoad":10,"arrowCount":12},function(resultobj){
     console.log(resultobj);
 });
+//
+//ArcheriesScoreController.scoreByClubRank({"clubIdList":['56fe9c2b7fc2a9dc0de5f8d8'],"arrowRoad":10,"arrowCount":12},function(resultobj){
+//    console.log(resultobj);
+//});
+

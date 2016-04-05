@@ -10,7 +10,7 @@ var fs = require('fs');
 var path = require('path');
 var uuid = require('node-uuid');
 
-var userpath = __dirname + config.tempfolder;
+var userpath = __dirname +"/../"+ config.tempfolder;
 
 module.exports = {
      /**

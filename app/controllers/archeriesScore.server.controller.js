@@ -10,6 +10,11 @@ var resultobjs = require('../models/result.server.model');
 var fs = require('fs');
 var config = require('../../config/config');
 
+//用户根路径
+var userrootfolder = "../" + config.usersPicture;
+//临时文件夹路径
+var tempfilefloder = "../" + config.tempfolder;
+
 module.exports = {
     create: function(_createscore, callback) {
         var clientscore =_createscore;
@@ -19,33 +24,75 @@ module.exports = {
             clientscore.arrowCount &&
             clientscore.totalPoint &&
             clientscore.avgeragePoint &&
-            //clientscore.archeryList &&
+            clientscore.archeryList &&
             clientscore.bullseye &&
             clientscore.picture){
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
             score.isAffirm = true;
-            score.save(function(err){
-                if(err){
-                    callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
+
+
+            //判断用户是否存在,获取出用户
+            UserController.userById(clientscore.userId,function(userresult){
+                if(userresult.result){
+                    //用户存在
+
+                    //更新用户的总环均环总箭数等数据
+                    let user = userresult.body;
+                    console.log(user);
+                    user.userId = clientscore.userId;
+                    user.arrowCount += clientscore.arrowCount;
+                    user.totalPoint += clientscore.totalPoint;
+
+                    user.avgeragePoint = user.totalPoint/user.arrowCount;
+                    console.log(user);
+                    //执行更新用户数据
+                    UserController.update(user,function(updatescoreresult){
+                        //console.log(updatescoreresult);
+                    });
+
+                    score.save(function(err){
+                        if(err){
+                            callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
+                            return;
+                        }
+
+
+
+
+                        //判断是否有图片
+                        if(clientscore.picture){
+                            //var folder_exists = fs.existsSync(config.tempfolder);
+                            if(!fs.existsSync(userrootfolder + clientscore.userId)){
+                                fs.mkdirSync(userrootfolder + clientscore.userId);
+                                fs.mkdirSync(userrootfolder + clientscore.userId + "/score/");
+                            }
+
+                            fs.rename(tempfilefloder + clientscore.picture,userrootfolder + clientscore.userId + "/score/" + clientscore.picture,function(err){
+                                if(err){
+                                    //可能存在错误
+                                    console.log(err);
+                                    return;
+                                }
+                            });
+                        }
+
+                        callback(resultobjs.createResult(true,'','',score));
+
+                    });
+
+
+                } else {
+                    callback(resultobjs.createResult(false,'UserNotExist','用户不存在'));
                     return;
                 }
-
-                //UserController.updatescore_server(clientscore.userId,{totalPoint:clientscore.totalPoint,arrowCount:clientscore.arrowCount},function(scoreresult){
-                callback(resultobjs.createResult(true,'','',score));
-
-                //判断是否有图片
-                if(clientscore.picture){
-                    var folder_exists = fs.existsSync(config.tempfolder);
-                }
-
-                //    if(scoreresult.result){
-                //        _callback(resultobjs.createResult(true,'','',score));
-                //    } else {
-                //        _callback(resultobjs.createResult(false,scoreresult.errorType,scoreresult.errprMessage));
-                //    }
-                //});
             });
+
+
+
+
+
+
 
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
@@ -125,7 +172,7 @@ module.exports = {
                         arrowcount = arrowcount + clubuser[useritem][scoreItem].arrowCount;
                     }
 
-                    let avgerage = totalpoint/clubuser[useritem].length+(arrowcount * 0.02); //计算积分
+                    let avgerage = totalpoint/clubuser[useritem].length+(arrowcount * config.coefficient); //计算积分
                     let avgeragePoint = totalpoint/(clubuser[useritem].length * clubrank.arrowCount); //计算平均环数
 
                     clubscoreList.push({userId:useritem,point:avgerage,arrowCount:avgeragePoint});

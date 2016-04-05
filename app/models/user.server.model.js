@@ -22,13 +22,13 @@ var UserSchema = new mongoose.Schema({
     mood:String,//个人签名
     accountVersion:String,//版本
     clubId:String, //所属箭管
-    arrowCount:String,//总箭数
+    arrowCount:Number,//总箭数
     victory:{type:Number,default:0},//胜利次数
     defeated:{type:Number,default:0},//失败次数
-    avgeragePoint:String,//平均环
-    totalPoint:String,//总环
-    challengeNum:Number, //挑战次数
-    Refusing:Number,//拒绝挑战的次数
+    avgeragePoint:{type:Number,default:0},//平均环
+    totalPoint:{type:Number,default:0},//总环
+    challengeNum:{type:Number,default:0}, //挑战次数
+    Refusing:{type:Number,default:0},//拒绝挑战的次数
     rankPoint:String,//排名成绩
     visibleGrade:Boolean, //是否可以看成绩
     defaultArrowCount:{type:Number,default:12},//默认箭数

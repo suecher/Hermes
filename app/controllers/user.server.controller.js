@@ -63,7 +63,12 @@ module.exports = {
                     return;
                 }
 
-                callback(resultobjs.createResult(true,'','',doc));
+                if(doc){
+                    callback(resultobjs.createResult(true,'','',doc));
+                } else {
+                    callback(resultobjs.createResult(false,'UserNotExist','用户不存在'));
+                }
+
             })
 
         }
@@ -97,28 +102,9 @@ module.exports = {
     },
     update:function(clientuser,callback){
         //需要测试
-        if(clientuser.password &&
-            clientuser.province &&
-            clientuser.city &&
-            clientuser.email &&
-            clientuser.picture &&
-            clientuser.clubId &&
-            clientuser.arrowCount &&
-            clientuser.defaultArrowCount &&
-            clientuser.defaultArrowRoad
-        ) {
+        if(clientuser.userId) {
             User.update({_id: clientuser.userId}, {
-                $set: {
-                    'totalPoint': clientuser.password,
-                    'province': clientuser.province,
-                    'city': clientuser.city,
-                    'email': clientuser.email,
-                    'picture': clientuser.picture,
-                    'clubId': clientuser.clubId,
-                    'arrowCount': clientuser.arrowCount,
-                    'defaultArrowCount': clientuser.defaultArrowCount,
-                    'defaultArrowRoad': clientuser.defaultArrowRoad
-                }
+                $set: clientuser
             }, function (err, data) {
                 if (err) {
                     callback(resultobjs.createResult(false, 'UpdateUserScore', err.message));
@@ -128,7 +114,7 @@ module.exports = {
                 callback(resultobjs.createResult(true, '', '', data));
             });
         } else {
-            _callback(resultobjs.createResult(false,'Required parameter missing','缺少用户名或者密码'));
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
         }
     },
     list:function(req,res,next){

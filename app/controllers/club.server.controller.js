@@ -74,5 +74,19 @@ module.exports = {
         }else{
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
+    },
+    listByCityAll:function(cityId,callback){
+        if(cityId){
+            Clups.find({'city':cityId},{_id:1},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,'','',docs));
+            })
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
+        }
     }
 };

@@ -34,7 +34,12 @@ module.exports = function(app){
     //根据接收者获取信息
     app.route('/messagelistbyreceiveid')
         .post(function(req,res){
-            MessageController.messageListByReceiveId(req.body.receiveId,function(resultobjs){
+
+            let receive = {};
+            receive.receiveId = req.body.receiveId;
+            receive.startDate = req.body.startDate;
+            receive.endDate = req.body.endDate;
+            MessageController.messageListByReceiveId(req.body.receiveId,receive.startDate,receive.endDate,function(resultobjs){
                 res.json(resultobjs);
             });
         });

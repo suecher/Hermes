@@ -26,6 +26,7 @@ module.exports = {
             clientscore.avgeragePoint &&
             clientscore.archeryList &&
             clientscore.bullseye &&
+            clientscore.clubId &&
             clientscore.picture){
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
@@ -100,7 +101,9 @@ module.exports = {
         }
     },
     scoreByUserAndDate:function(userId,startdate,enddate,callback){
-        if(userId){
+        if(userId && startdate && enddate){
+
+
             ArcheriesScore.find({
                 "userId":userId,
                 "createTime":{
@@ -109,6 +112,7 @@ module.exports = {
                 if(err){
                     callback(resultobjs.createResult(false,'SelectScoreByUserInfoError',err.message));
                 }
+
 
                 //格式化对象 计算最终的数据
                 let scorelistobj = {};

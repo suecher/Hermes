@@ -89,12 +89,10 @@ module.exports = function(app){
                             res.json(scoreResult);
                         });
 
-
                     } else {
                         res.json(resultobj);
                     }
                 });
-
 
             } else {
                 res.json({result:false,errorType:'SubmitParameterError',errorMessage:'缺少必要参数'});

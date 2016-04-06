@@ -29,7 +29,6 @@ module.exports = function(app){
         });
 
 
-
     app.route('/addclub')
         .post(function(req,res,next){
             var clientclub = req.body;

@@ -45,9 +45,5 @@ module.exports = function(app){
     app.route('/userfriends')
         .post(UserController.list);
 
-    app.route('/test')
-        .get(function(req,res){
-            var config = require('../../config/config');
-            console.log(__dirname + config.tempfolder);
-        });
+
 };

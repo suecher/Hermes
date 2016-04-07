@@ -100,6 +100,23 @@ module.exports = {
 
         }
     },
+    userofclub:function(userofclubInfo,callback){
+        if(userofclubInfo.userId && userofclubInfo.clubId && userofclubInfo.clubName){
+            User.update({_id:userofclubInfo.userId},{
+                $set:{clubId:userofclubInfo.clubId,
+                clubName:userofclubInfo.clubName}
+            },function(err,data){
+                if(err){
+                    callback(resultobjs.createResult(false, 'UpdateUserOfClub', err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true, '', '', data));
+            })
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要参数 用户ID 俱乐部ID 俱乐部名称'));
+        }
+    },
     update:function(clientuser,callback){
         //需要测试
         if(clientuser.userId) {

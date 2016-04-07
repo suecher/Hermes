@@ -52,7 +52,5 @@ module.exports = {
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要参数,用户ID或者俱乐部ID'));
         }
-
     }
-
 };

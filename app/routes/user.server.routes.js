@@ -19,7 +19,14 @@ module.exports = function(app){
             });
         });
 
-
+    app.route('/userofclub')
+        .post(function(req,res){
+            let clientuserofclub = req.body;
+            UserController.userofclub(clientuserofclub,function(resultobj){
+                res.json(resultobj);
+            });
+        });
+    
     app.route('/userupdate')
         .post(function(req,res){
             var clientuser = req.body;

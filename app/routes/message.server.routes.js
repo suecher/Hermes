@@ -1,6 +1,9 @@
 /**
  * Created by Administrator on 2016/3/23.
  */
+"use strict";
+
+
 
     "use strict";
 var MessageController = require('../controllers/message.server.controller');
@@ -9,6 +12,7 @@ module.exports = function(app){
     app.route('/createmessage')
         .post(function(req,res){
             var clientmessage = req.body;
+
             MessageController.create(clientmessage,function(resultobjs){
                 res.json(resultobjs);
             });

@@ -2,6 +2,8 @@
  * Created by Administrator on 2016/3/14.
  */
 
+"use strict";
+let moment = require('moment');
 var mongoose = require('mongoose');
 
 var MessageSchema = new mongoose.Schema({
@@ -14,7 +16,7 @@ var MessageSchema = new mongoose.Schema({
     messagePic:[], // 消息图片序列
     body:Object, // 消息结构体 比如挑战,投票等.
     read:Boolean,//是否阅读
-    createTime:{type:Date,default:Date.now()}
+    createTime:Date
 });
 
 var Message = mongoose.model('Message',MessageSchema);

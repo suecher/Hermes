@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+</head>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url:'/createmessage',
+            type:'post',
+            data:{"sendId":"S01","receiveId":"S02","content":"测试时间2","messageType":1},
+            success:function(data){
+                alert(data);
+                console.log(data);
+            },
+            error:function(err){
+                alert(err);
+                console.log(err);
+            }
+        })
+    });
+</script>
+<body>
+
+</body>
+</html>

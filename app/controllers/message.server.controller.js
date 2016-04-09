@@ -10,20 +10,21 @@ var Message = mongoose.model('Message');
 var resultobjs = require('../models/result.server.model');
 
 module.exports = {
-
     create:function(clientMessage,callback){
         if(clientMessage.sendId &&
         clientMessage.receiveId &&
         clientMessage.content &&
         clientMessage.messageType){
+            clientMessage.createTime = Date.now();
             var message = Message(clientMessage);
-
             message.save(function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'AddMessageError',err.message));
                     return;
                 }
 
+                var resultmessage = {};
+                console.log(resultmessage);
                 callback(resultobjs.createResult(true,'','',message));
             });
 

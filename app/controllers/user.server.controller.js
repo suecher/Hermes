@@ -5,7 +5,14 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+var fs = require('fs');
 var resultobjs = require('../models/result.server.model');
+var config = require('../../config/config');
+
+//用户根路径
+var userrootfolder = "../" + config.usersPicture;
+//临时文件夹路径
+var tempfilefloder = "../" + config.tempfolder;
 
 module.exports = {
     create:function(_createuser,_callback){
@@ -118,7 +125,6 @@ module.exports = {
         }
     },
     update:function(clientuser,callback){
-        //需要测试
         if(clientuser.userId) {
             User.update({_id: clientuser.userId}, {
                 $set: clientuser
@@ -126,6 +132,23 @@ module.exports = {
                 if (err) {
                     callback(resultobjs.createResult(false, 'UpdateUserScore', err.message));
                     return;
+                }
+
+
+                //判断是否修改了头像文件
+                if(clientuser.IsEditedPic){
+                    //判断路径是否存在
+                    if(!fs.existsSync(userrootfolder + clientuser.userId)){
+                        fs.mkdirSync(userrootfolder + clientuser.userId);
+                    }
+
+                    fs.rename(tempfilefloder + clientuser.picture,userrootfolder + clientuser.userId +"/"+ clientuser.picture,function(err){
+                        if(err){
+                            //可能存在错误
+                            console.log(err);
+                            return;
+                        }
+                    });
                 }
 
                 callback(resultobjs.createResult(true, '', '', data));

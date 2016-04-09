@@ -32,9 +32,9 @@ module.exports = {
             return;
         }
     },
-    messageByreceiveIdAndsendId:function(receiveId,sendId,callback){
-        if(receiveId && sendId){
-            Message.find({"receiveId":receiveId,"sendId":sendId},function(err,docs){
+    messageByreceiveIdAndsendId:function(receiveId,sendId,messageType,callback){
+        if(receiveId && sendId && messageType){
+            Message.find({"receiveId":receiveId,"sendId":sendId,"messageType":messageType},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectMessageError',err.message));
                     return;

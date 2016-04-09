@@ -18,7 +18,7 @@ module.exports = function(app){
     app.route('/getmessage')
         .post(function(req,res){
             var clientmessage = req.body;
-            MessageController.messageByreceiveIdAndsendId(clientmessage.receiveId,clientmessage.sendId,function(resultobjs){
+            MessageController.messageByreceiveIdAndsendId(clientmessage.receiveId,clientmessage.sendId,clientmessage.messageType,function(resultobjs){
                 res.json(resultobjs);
             });
         });

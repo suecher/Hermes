@@ -26,8 +26,9 @@ module.exports = {
                 createuser.defaultArrowRoad &&
                 createuser.defaultArrowCount
                 ){
-
+                createuser.createTime = Date.now();
                 var user = User(createuser);
+
                 user.save(function(err){
 
                     if(err){

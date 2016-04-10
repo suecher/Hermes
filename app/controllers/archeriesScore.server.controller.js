@@ -31,7 +31,7 @@ module.exports = {
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
             score.isAffirm = true;
-
+            score.createTime = Date.now();
 
             //判断用户是否存在,获取出用户
             UserController.userById(clientscore.userId,function(userresult){

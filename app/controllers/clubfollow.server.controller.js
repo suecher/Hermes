@@ -8,6 +8,7 @@ var resultobjs = require('../models/result.server.model');
 module.exports = {
     create:function(clientClubfollow,callback){
         if(clientClubfollow.clubId && clientClubfollow.userId){
+            clientClubfollow.createTime = Date.now();
             let clubfollow = ClubFollow(clientClubfollow);
 
             clubfollow.save(function(err){

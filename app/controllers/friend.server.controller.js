@@ -15,6 +15,7 @@ module.exports = {
             var friend = Friend();
             friend.userId = client.userId;
             friend.friendId = client.friendId;
+            friend.createTime = Date.now();
             friend.save(function(err){
                 callback(resultobjs.createResult(true,'','',friend));
                 return;

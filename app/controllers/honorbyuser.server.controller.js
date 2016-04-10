@@ -13,7 +13,7 @@ module.exports = {
             clicentUserHonor.honorId &&
             clicentUserHonor.userId
           ){
-
+            clicentUserHonor.createTime = Date.now();
             var honor = HonorByUser(clicentUserHonor);
             honor.save(function(err){
                 if(err){

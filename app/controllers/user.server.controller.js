@@ -89,6 +89,28 @@ module.exports = {
             return;
         }
     },
+    userByMobile:function(userMobile,callback){
+        if(userId){
+            User.findOne({'mobile':userMobile},{password:0},function(err,doc){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectUserError',err.message));
+                    return;
+                }
+
+                if(doc){
+                    callback(resultobjs.createResult(true,'','',doc));
+                } else {
+                    callback(resultobjs.createResult(false,'UserNotExist','用户不存在'));
+                }
+
+            })
+
+        }
+        else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
+            return;
+        }
+    },
     login:function(_userlogin,_callback){
         var userlogin = _userlogin;
         console.log(userlogin);

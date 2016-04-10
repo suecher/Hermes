@@ -50,6 +50,13 @@ module.exports = function(app){
             });
         });
 
+    app.route('/userbymobile')
+        .post(function(req,res){
+            UserController.userByMobile(req.body.userMobile,function(resultobjs){
+                res.send(resultobjs);
+            });
+        });
+
     app.route('/userfriends')
         .post(UserController.list);
 

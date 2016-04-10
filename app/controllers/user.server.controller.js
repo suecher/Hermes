@@ -31,6 +31,10 @@ module.exports = {
                 user.save(function(err){
 
                     if(err){
+                        if(err.code == 11000){
+                            _callback(resultobjs.createResult(false,'UserOrMobileExist',err.message));
+                            return;
+                        }
                         _callback(resultobjs.createResult(false,'CreateUserError',err.message));
                         return;
                     }

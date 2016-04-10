@@ -6,7 +6,8 @@ var UserController = require('../controllers/user.server.controller');
 
 module.exports = function(app){
     app.route('/usersignin')
-        .post(function(req,res,next){
+        .post(function(req,res){
+
             UserController.create(req.body,function(resultobjs){
                 res.json(resultobjs);
             });

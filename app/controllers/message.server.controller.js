@@ -23,8 +23,6 @@ module.exports = {
                     return;
                 }
 
-                var resultmessage = {};
-                console.log(resultmessage);
                 callback(resultobjs.createResult(true,'','',message));
             });
 

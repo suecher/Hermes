@@ -75,6 +75,20 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
     },
+    clubByName:function(clubName,callback){
+        if(clubName){
+            Clups.find({name:/clubName/},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectClubError','按俱乐部名称模糊查询'));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,null,null,docs));
+            });
+        } else  {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,俱乐部名称'));
+        }
+    },
     listByCityAll:function(cityId,callback){
         if(cityId){
             Clups.find({'city':cityId},{_id:1},function(err,docs){

@@ -13,8 +13,9 @@ let moment = require('moment');
 //},1000);
 
 
-console.log(new Date().toGMTString());
-console.log(moment(new Date()).format("YYYY-MM-DD HH:mm Z").toString());
+//console.log(new Date().toGMTString());
+//console.log(moment(new Date()).format("YYYY-MM-DD HH:mm Z").toString());
+//console.log(new Date("2016-04-09T15:52:20.000Z").toLocaleString());
 
 
-console.log(new Date("2016-04-09T15:52:20.000Z").toLocaleString());
+console.log(moment(moment.utc()).format('YYYY-MM-DD HH:mm Z'));

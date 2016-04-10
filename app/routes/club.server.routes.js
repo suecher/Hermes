@@ -37,6 +37,13 @@ module.exports = function(app){
             });
         });
 
+    app.route('/clubbyname')
+        .post(function(req,res){
+            ClubControllers.clubByName(clientclubname,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
 
 
 };

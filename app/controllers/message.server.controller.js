@@ -6,6 +6,7 @@
 
 var mongoose = require('mongoose');
 var Message = mongoose.model('Message');
+let moment = require('moment');
 
 var resultobjs = require('../models/result.server.model');
 
@@ -22,7 +23,7 @@ module.exports = {
                     callback(resultobjs.createResult(false,'AddMessageError',err.message));
                     return;
                 }
-
+                message.createTime = moment.format(message.createTime);
                 callback(resultobjs.createResult(true,'','',message));
             });
 

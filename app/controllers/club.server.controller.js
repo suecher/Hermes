@@ -77,7 +77,7 @@ module.exports = {
     },
     clubByName:function(clubName,callback){
         if(clubName){
-            Clups.find({name:/clubName/},function(err,docs){
+            Clups.find({name:{$regex:clubName}},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectClubError','按俱乐部名称模糊查询'));
                     return;

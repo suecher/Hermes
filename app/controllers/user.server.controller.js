@@ -90,7 +90,7 @@ module.exports = {
         }
     },
     userByMobile:function(userMobile,callback){
-        if(userId){
+        if(userMobile){
             User.findOne({'mobile':userMobile},{password:0},function(err,doc){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectUserError',err.message));

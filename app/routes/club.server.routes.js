@@ -39,6 +39,9 @@ module.exports = function(app){
 
     app.route('/clubbyname')
         .post(function(req,res){
+
+
+
             ClubControllers.clubByName(req.body.clubName,function(resultobjs){
                 res.json(resultobjs);
             });

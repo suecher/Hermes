@@ -28,6 +28,12 @@ module.exports = {
             clientscore.bullseye &&
             clientscore.clubId &&
             clientscore.picture){
+
+
+            console.log(clientscore.archeryList);
+            //如果是数组的值是字符串。转为数字存储
+            clientscore.archeryList = clientscore.archeryList.map(n => parseInt(n));
+
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
             score.isAffirm = true;
@@ -57,9 +63,6 @@ module.exports = {
                             callback(resultobjs.createResult(false,'CreateArcheriesScore',err.message));
                             return;
                         }
-
-
-
 
                         //判断是否有图片
                         if(clientscore.picture){

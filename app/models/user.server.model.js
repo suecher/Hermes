@@ -11,12 +11,12 @@ var UserSchema = new mongoose.Schema({
     mobile:{type:String,unique:true},//手机号码
     password:String,//密码
     currency:{type:Number,default:0},//货币
-    email:String,//邮件
+    email:{type:String,unique:true},//邮件
     gender:String,//性别
     status:{type:Number,deault:1},//状态  0.停用 1正常使用 3冻结
     birthday:{type:Date,deault:Date.now()},//生日
     province:Number,//省份
-    city:Number,//城市
+    city:Number,//城市  
     picture:String,//头像
     backgroundPic:Object,//背景图
     mood:String,//个人签名

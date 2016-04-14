@@ -23,7 +23,7 @@ module.exports = {
                     callback(resultobjs.createResult(false,'AddMessageError',err.message));
                     return;
                 }
-                message.createTime = moment.format(message.createTime);
+                //message.createTime = moment.format(message.createTime);
                 callback(resultobjs.createResult(true,'','',message));
             });
 

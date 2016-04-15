@@ -9,6 +9,9 @@ var fs = require('fs');
 var resultobjs = require('../models/result.server.model');
 var config = require('../../config/config');
 
+
+let Club = require('../controllers/club.server.controller');
+
 //用户根路径
 var userrootfolder = "../" + config.usersPicture;
 //临时文件夹路径
@@ -135,7 +138,7 @@ module.exports = {
         }
     },
     userofclub:function(userofclubInfo,callback){
-        if(userofclubInfo.userId && userofclubInfo.clubId && userofclubInfo.clubName){
+        if(userofclubInfo.userId && userofclubInfo.clubId && userofclubInfo.clubName && userofclubInfo.oldClubId){
             User.update({_id:userofclubInfo.userId},{
                 $set:{clubId:userofclubInfo.clubId,
                 clubName:userofclubInfo.clubName}
@@ -144,6 +147,21 @@ module.exports = {
                     callback(resultobjs.createResult(false, 'UpdateUserOfClub', err.message));
                     return;
                 }
+
+                //增加俱乐部会员数
+                Club.clubUpdateMemberAndFollow(userofclubInfo.clubId,0,1,function(clubfollowresult){
+                    if(!clubfollowresult.result){
+                        console.log('修改俱乐部关注数错误');
+                    }
+                });
+
+                //减少原俱乐部会员数
+                Club.clubUpdateMemberAndFollow(userofclubInfo.oldClubId,0,-1,function(clubfollowresult){
+                    if(!clubfollowresult.result){
+                        console.log('修改俱乐部关注数错误');
+                    }
+                });
+
 
                 callback(resultobjs.createResult(true, '', '', data));
             })

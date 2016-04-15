@@ -41,5 +41,20 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户的ID'));
             return;
         }
+    },
+    removefriend:function(friendId,callback){
+        if(userId){
+            Friend.remove({friendId:friendId},function(err){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectFrientError',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,null,null));
+            });
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户的ID'));
+            return;
+        }
     }
-}
+};

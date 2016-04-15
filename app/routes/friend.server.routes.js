@@ -19,4 +19,12 @@ module.exports = function(app){
                 res.json(resultobjs);
             });
         });
-}
+
+
+    app.route('/removefriend')
+        .post(function(req,res){
+            FriendController.removefriend(req.body.friendId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+};

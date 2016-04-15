@@ -36,6 +36,22 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
         }
     },
+    clubUpdateMemberAndFollow:function(clubId,followSize,memberSize,callback){
+        if(clubId) {
+
+            Clups.update({clubId:clubId},{$inc:{'followSize':followSize,'memberSize':memberSize}},function(err,data){
+                if(err){
+                    callback(resultobjs.createResult(false,'UpdateMemberAndFollow',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,null,null,data));
+            });
+
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
+        }
+    },
     clubById:function(clubId,callback){
         if(clubId){
             Clups.findOne({"_id":clubId},function(err,doc){

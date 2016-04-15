@@ -3,7 +3,8 @@
 let mongoose = require('mongoose');
 
 let ClubFollow = mongoose.model('ClubFollow');
-var resultobjs = require('../models/result.server.model');
+let resultobjs = require('../models/result.server.model');
+let Club = require('../controllers/club.server.controller');
 
 module.exports = {
     create:function(clientClubfollow,callback){
@@ -17,6 +18,8 @@ module.exports = {
                     return;
                 }
 
+                //更新俱乐部的关注数
+                Club.clubUpdateMemberAndFollow(clientClubfollow.clubId,1,0);
                 callback(resultobjs.createResult(true,null,null,clubfollow));
 
             });
@@ -48,6 +51,7 @@ module.exports = {
                     return;
                 }
 
+                Club.clubUpdateMemberAndFollow(clientClubFollow.clubId,-1,0);
                 callback(resultobjs.createResult(true,null,null));
             });
         } else {

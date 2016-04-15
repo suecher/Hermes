@@ -56,7 +56,7 @@ module.exports = {
                 }
 
                 //减去俱乐部关注数
-                Club.clubUpdateMemberAndFollow(clientClubfollow.clubId,-1,0,function(clubfollowresult){
+                Club.clubUpdateMemberAndFollow(clientClubFollow.clubId,-1,0,function(clubfollowresult){
                     if(!clubfollowresult.result){
                         console.log('修改俱乐部关注数错误');
                     }

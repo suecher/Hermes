@@ -39,9 +39,10 @@ module.exports = {
     clubUpdateMemberAndFollow:function(clubId,followSize,memberSize,callback){
         if(clubId) {
 
-            Clups.update({clubId:clubId},{$inc:{'followSize':followSize,'memberSize':memberSize}},function(err,data){
+            Clups.update({_id:clubId},{$inc:{'followSize':followSize,'memberSize':memberSize}},function(err,data){
                 if(err){
                     callback(resultobjs.createResult(false,'UpdateMemberAndFollow',err.message));
+                    console.log(err.message);
                     return;
                 }
 

@@ -30,7 +30,7 @@ module.exports = {
             clientscore.picture){
 
 
-            console.log(clientscore.archeryList);
+
             //如果是数组的值是字符串。转为数字存储
             clientscore.archeryList = clientscore.archeryList.map(n => parseInt(n));
 

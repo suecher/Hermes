@@ -23,7 +23,7 @@ var UserSchema = new mongoose.Schema({
     accountVersion:String,//版本
     clubId:String, //所属箭管
     clubName:String, //所属箭馆名称
-    arrowCount:Number,//总箭数
+    arrowCount:{type:Number,default:0},//总箭数
     victory:{type:Number,default:0},//胜利次数
     defeated:{type:Number,default:0},//失败次数
     avgeragePoint:{type:Number,default:0},//平均环

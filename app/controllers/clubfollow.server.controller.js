@@ -19,9 +19,13 @@ module.exports = {
                 }
 
                 //更新俱乐部的关注数
-                Club.clubUpdateMemberAndFollow(clientClubfollow.clubId,1,0);
-                callback(resultobjs.createResult(true,null,null,clubfollow));
+                Club.clubUpdateMemberAndFollow(clientClubfollow.clubId,1,0,function(clubfollowresult){
+                    if(!clubfollowresult.result){
+                        console.log('修改俱乐部关注数错误');
+                    }
+                });
 
+                callback(resultobjs.createResult(true,null,null,clubfollow));
             });
 
         } else {
@@ -51,7 +55,14 @@ module.exports = {
                     return;
                 }
 
-                Club.clubUpdateMemberAndFollow(clientClubFollow.clubId,-1,0);
+                //减去俱乐部关注数
+                Club.clubUpdateMemberAndFollow(clientClubfollow.clubId,-1,0,function(clubfollowresult){
+                    if(!clubfollowresult.result){
+                        console.log('修改俱乐部关注数错误');
+                    }
+                });
+
+
                 callback(resultobjs.createResult(true,null,null));
             });
         } else {

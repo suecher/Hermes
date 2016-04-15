@@ -42,9 +42,9 @@ module.exports = {
             return;
         }
     },
-    removefriend:function(friendId,callback){
+    removefriend:function(userId,friendId,callback){
         if(userId){
-            Friend.remove({friendId:friendId},function(err){
+            Friend.remove({userId:userId,friendId:friendId},function(err){
                 if(err){
                     callback(resultobjs.createResult(false,'SelectFrientError',err.message));
                     return;

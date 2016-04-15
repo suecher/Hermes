@@ -138,7 +138,7 @@ module.exports = {
         }
     },
     userofclub:function(userofclubInfo,callback){
-        if(userofclubInfo.userId && userofclubInfo.clubId && userofclubInfo.clubName && userofclubInfo.oldClubId){
+        if(userofclubInfo.userId && userofclubInfo.clubId && userofclubInfo.clubName){
             User.update({_id:userofclubInfo.userId},{
                 $set:{clubId:userofclubInfo.clubId,
                 clubName:userofclubInfo.clubName}
@@ -155,13 +155,16 @@ module.exports = {
                     }
                 });
 
-                //减少原俱乐部会员数
-                Club.clubUpdateMemberAndFollow(userofclubInfo.oldClubId,0,-1,function(clubfollowresult){
-                    if(!clubfollowresult.result){
-                        console.log('修改俱乐部关注数错误');
-                    }
-                });
 
+                //判断是否有原俱乐部。
+                if(userofclubInfo.oldClubId){
+                    //减少原俱乐部会员数
+                    Club.clubUpdateMemberAndFollow(userofclubInfo.oldClubId,0,-1,function(clubfollowresult){
+                        if(!clubfollowresult.result){
+                            console.log('修改俱乐部关注数错误');
+                        }
+                    });
+                }
 
                 callback(resultobjs.createResult(true, '', '', data));
             })

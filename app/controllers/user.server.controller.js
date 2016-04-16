@@ -8,7 +8,7 @@ var User = mongoose.model('User');
 var fs = require('fs');
 var resultobjs = require('../models/result.server.model');
 var config = require('../../config/config');
-
+var securityManage = require('../../config/securityCodeManage');
 
 let Club = require('../controllers/club.server.controller');
 
@@ -27,8 +27,15 @@ module.exports = {
                 createuser.province &&
                 createuser.city &&
                 createuser.defaultArrowRoad &&
-                createuser.defaultArrowCount
+                createuser.defaultArrowCount &&
+                createuser.code
                 ){
+
+                if(!securityManage.verificationCode(createuser.mobile,createuser.code).result){
+                    _callback(resultobjs.createResult(false,'SecurityCodeError',"验证码错误"));
+                }
+
+
                 createuser.createTime = Date.now();
                 var user = User(createuser);
 

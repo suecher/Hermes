@@ -41,7 +41,7 @@ module.exports = function(){
         }
     });
 
-    app.use(function(err,res,res,next){
+    app.use(function(err,req,res,next){
         if(!err) { return next()}
         res.status(500);
         try{

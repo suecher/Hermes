@@ -11,7 +11,7 @@ module.exports = function(app){
         .post(function(req,res){
             let mobile = req.body.mobile;
             securityManage.createUserCode(mobile);
-            res.json();
+            res.end();
         });
 
 

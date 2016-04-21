@@ -27,12 +27,13 @@ module.exports = {
             clientscore.archeryList &&
             clientscore.bullseye &&
             clientscore.clubId &&
-            clientscore.picture){
-
+            clientscore.picture &&
+            clientscore.bowType){
 
 
             //如果是数组的值是字符串。转为数字存储
-            clientscore.archeryList = clientscore.archeryList.map(n => parseInt(n));
+            clientscore.totalPoint = parseInt(clientscore.totalPoint);
+            clientscore.arrowCount = parseInt(clientscore.arrowCount);
 
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
@@ -46,13 +47,13 @@ module.exports = {
 
                     //更新用户的总环均环总箭数等数据
                     let user = userresult.body;
-                    console.log(user);
+                    //console.log(user);
                     user.userId = clientscore.userId;
                     user.arrowCount += clientscore.arrowCount;
                     user.totalPoint += clientscore.totalPoint;
 
                     user.avgeragePoint = user.totalPoint/user.arrowCount;
-                    console.log(user);
+                    //console.log(user);
                     //执行更新用户数据
                     UserController.update(user,function(updatescoreresult){
                         //console.log(updatescoreresult);

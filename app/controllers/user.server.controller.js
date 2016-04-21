@@ -33,6 +33,7 @@ module.exports = {
 
                 if(!securityManage.verificationCode(createuser.mobile,createuser.code).result){
                     _callback(resultobjs.createResult(false,'SecurityCodeError',"验证码错误"));
+                    return;
                 }
 
 

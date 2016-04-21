@@ -30,6 +30,8 @@ module.exports = function(){
     require('../app/routes/clubfollow.server.routes')(app);
     require('../app/routes/security.server.routes')(app);
     require('../app/routes/test.server.routes')(app);
+    require('../app/routes/bowType.server.routes')(app);
+    require('../app/routes/advert.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

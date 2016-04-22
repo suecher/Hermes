@@ -12,7 +12,6 @@ module.exports = function(app){
     app.route('/createmessage')
         .post(function(req,res){
             var clientmessage = req.body;
-
             MessageController.create(clientmessage,function(resultobjs){
                 res.json(resultobjs);
             });

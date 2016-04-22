@@ -12,31 +12,52 @@ var resultobjs = require('../models/result.server.model');
 
 module.exports = {
     create:function(clientMessage,callback){
+        console.log(clientMessage);
         if(clientMessage.sendId &&
         clientMessage.receiveId &&
         clientMessage.content &&
         clientMessage.messageType){
             clientMessage.createTime = Date.now();
-
+            let message = Message(clientMessage);
 
             //判断是否为好友请求消息或对战消息 如果是这两种消息。判断是否存在。。如果已存在。不重复添加
             if(clientMessage.messageType == 4 || clientMessage.messageType == 6){
                 this.messageExist({sendId:clientMessage.sendId,receiveId:clientMessage.receiveId,messageType:clientMessage.messageType},function(resultobj){
-                    if(resultobj.result){
-
-                        //判断如果不是重复消息再保存信息
-                        let message = Message(clientMessage);
+                    if(!resultobj.result){
                         message.save(function(err){
-                            if(err){
-                                callback(resultobjs.createResult(false,'AddMessageError',err.message));
-                                return;
-                            }
+                                if(err){
+                                    callback(resultobjs.createResult(false,'AddMessageError',err.message));
+                                    return;
+                                }
+                                callback(resultobjs.createResult(true,'','',message));
+                            });
 
-                            callback(resultobjs.createResult(true,'','',message));
-                        });
-                    };
+                    } else {
+                        callback(resultobjs.createResult(false,'MsgExist',"请求信息已存在"));
+                    }
                 });
-            };
+            } else {
+                message.save(function(err){
+                    if(err){
+                        callback(resultobjs.createResult(false,'AddMessageError',err.message));
+                        return;
+                    }
+
+                    callback(resultobjs.createResult(true,'','',message));
+                });
+            }
+
+
+            //判断如果不是重复消息再保存信息
+            //
+            //message.save(function(err){
+            //    if(err){
+            //        callback(resultobjs.createResult(false,'AddMessageError',err.message));
+            //        return;
+            //    }
+            //
+            //    callback(resultobjs.createResult(true,'','',message));
+            //});
 
         } else{
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,发送人ID,接收人ID,主题,内容,消息类型'));

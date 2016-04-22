@@ -16,8 +16,8 @@ module.exports = {
             challenge.arrowRoad){
             challenge.createTime = Date.now();
 
-            challenge.userScoreId = null;
-            challenge.rivalScoreId= null;
+            //challenge.userScoreId = null;
+            //challenge.rivalScoreId= null;
 
             // 更新用户信息。挑战次数
 

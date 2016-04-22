@@ -93,12 +93,6 @@ module.exports = {
                 }
             });
 
-
-
-
-
-
-
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
             return;

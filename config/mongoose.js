@@ -14,5 +14,6 @@ module.exports = function(){
     require('../app/models/message.server.model.js');
     require('../app/models/clubfollow.server.model.js');
     require('../app/models/advert.server.model.js');
+    require('../app/models/challenge.server.model.js');
     return db;
 };

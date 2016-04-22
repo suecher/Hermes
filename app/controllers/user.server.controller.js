@@ -78,6 +78,17 @@ module.exports = {
             return;
         }
     },
+    //对所有数值型进行增加或减少操作；
+    userUpdateNumType:function(userId,obj,callback){
+        User.update({_id:userId},{$inc:obj},function(err,data){
+            if(err){
+                callback(resultobjs.createResult(false,'UpdateUserScore',err.message));
+                return;
+            }
+
+            callback(resultobjs.createResult(true,'','',data));
+        });
+    },
     userById:function(userId,callback){
         if(userId){
             User.findOne({'_id':userId},{password:0},function(err,doc){

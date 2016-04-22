@@ -4,7 +4,8 @@
 "use strict";
 
 let mongoose = require('mongoose');
-let Challenge = mongoose("Challenge");
+let Challenge = mongoose.model("Challenge");
+let UserController = require('../controllers/user.server.controller');
 let resultobj = require('../models/result.server.model');
 
 module.exports = {
@@ -15,10 +16,21 @@ module.exports = {
             challenge.arrowRoad){
             challenge.createTime = Date.now();
 
-
+            challenge.userScoreId = null;
+            challenge.rivalScoreId= null;
 
             // 更新用户信息。挑战次数
 
+            UserController.userUpdateNumType(challenge.userId,{challengeNum:1},function(resultobj){
+                if(!resultobj.result){
+                    console.log('更新挑战次数失败');
+                }
+            });
+            UserController.userUpdateNumType(challenge.rivalId,{challengeNum:1},function(resultobj){
+                if(!resultobj.result){
+                    console.log('更新挑战次数失败');
+                }
+            });
 
             //
 
@@ -53,7 +65,8 @@ module.exports = {
         }
     },
     challengeUpdate:function(obj,callback){
+        if(obj){
 
+        }
     }
-
 };

@@ -16,6 +16,7 @@ module.exports = {
             challenge.arrowRoad){
             challenge.createTime = Date.now();
 
+
             //challenge.userScoreId = null;
             //challenge.rivalScoreId= null;
 
@@ -65,8 +66,44 @@ module.exports = {
         }
     },
     challengeUpdate:function(obj,callback){
-        if(obj){
+        if( obj._id &&
+            obj.userScoreId &&
+            obj.rivalScoreId &&
+            obj.finish){
 
+            //判断是否完结,完结更新信息
+            if(obj.finish){
+
+                if(!(obj.winnerId &&　obj.loserId)){
+                    callback(resultobj.createResult(false,'UpdateChallengeError','缺少获胜者(winnerId)失败者信息(loserId) '));
+                    return;
+                };
+
+                //更新胜利者信息
+                UserController.userUpdateNumType(obj.winnerId,{victory:1},function(resultobj){
+                    if(!resultobj.result){
+                        console.log('更新挑战次数失败');
+                    }
+                });
+
+                //更新失败者信息
+                UserController.userUpdateNumType(obj.loserId,{defeated:1},function(resultobj){
+                    if(!resultobj.result){
+                        console.log('更新挑战次数失败');
+                    }
+                });
+            };
+
+            Challenge.update({_id:obj._id},{$set:{obj}},function(err,data){
+                if(err){
+                    callback(resultobj.createResult(false,'UpdateChallengeError','更新对战信息时报错'));
+                    return;
+                }
+
+                callback(resultobj.createResult(true,null,null,data));
+            });
+        } else {
+            callback(resultobj.createResult(false,'Required parameter missing','缺少必要信息,'));
         }
     }
 };

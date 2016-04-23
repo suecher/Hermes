@@ -23,4 +23,11 @@ module.exports = function(app){
                 res.json(resultobj);
             });
         });
+
+    app.route('/challengeupdatescore')
+        .post(function(req,res){
+            ChallengeControllers.challengeUpdate(req.body,function(resultobj){
+                res.json(resultobj);
+            });
+        });
 };

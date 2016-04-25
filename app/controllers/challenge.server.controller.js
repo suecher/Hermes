@@ -67,8 +67,6 @@ module.exports = {
     },
     challengeUpdate:function(obj,callback){
         if( obj._id &&
-            obj.userScoreId &&
-            obj.rivalScoreId &&
             obj.finish){
 
             //判断是否完结,完结更新信息
@@ -94,11 +92,16 @@ module.exports = {
                 });
             };
 
-            Challenge.update({_id:obj._id},{$set:{obj}},function(err,data){
+            delete obj["winnerId"];
+            delete obj["loserId"];
+
+            Challenge.update({_id:obj._id},{$set:obj},function(err,data){
                 if(err){
                     callback(resultobj.createResult(false,'UpdateChallengeError','更新对战信息时报错'));
                     return;
                 }
+
+                console.log(obj);
 
                 callback(resultobj.createResult(true,null,null,data));
             });

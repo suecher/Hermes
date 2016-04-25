@@ -18,14 +18,13 @@ var tempfilefloder = "../" + config.tempfolder;
 module.exports = {
     create: function(_createscore, callback) {
         var clientscore =_createscore;
-
+        console.log(clientscore);
         if(clientscore.userId &&
             clientscore.arrowRoadStandard &&
             clientscore.arrowCount &&
             clientscore.totalPoint &&
             clientscore.avgeragePoint &&
             clientscore.archeryList &&
-            clientscore.bullseye &&
             clientscore.clubId &&
             clientscore.picture &&
             clientscore.bowType){
@@ -47,13 +46,12 @@ module.exports = {
 
                     //更新用户的总环均环总箭数等数据
                     let user = userresult.body;
-                    //console.log(user);
                     user.userId = clientscore.userId;
                     user.arrowCount += clientscore.arrowCount;
                     user.totalPoint += clientscore.totalPoint;
 
                     user.avgeragePoint = user.totalPoint/user.arrowCount;
-                    //console.log(user);
+
                     //执行更新用户数据
                     UserController.update(user,function(updatescoreresult){
                         //console.log(updatescoreresult);

@@ -43,12 +43,12 @@ module.exports = function(app){
             });
         });
 
-    app.route('/friendbyuserId')
-        .post(function(req,res){
-            UserController.userById(req.body.userId,function(resultobjs){
-                res.send(resultobjs);
-            });
-        });
+    //app.route('/friendbyuserId')
+    //    .post(function(req,res){
+    //        UserController.userById(req.body.userId,function(resultobjs){
+    //            res.send(resultobjs);
+    //        });
+    //    });
 
     app.route('/userbymobile')
         .post(function(req,res){

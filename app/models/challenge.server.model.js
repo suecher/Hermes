@@ -7,8 +7,8 @@ let mongoose = require('mongoose');
 let ChallengeSchema = mongoose.Schema({
     userId:String,
     rivalId:String,
-    userScoreId:String,
-    rivalScoreId:String,
+    userScoreId:{type:String,default:""},
+    rivalScoreId:{type:String,default:""},
     arrowCount:Number,
     totalPoint:{type:Number,default:0},
     arrowRoad:Number,

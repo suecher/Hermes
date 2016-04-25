@@ -30,4 +30,13 @@ module.exports = function(app){
                 res.json(resultobj);
             });
         });
+
+    app.route('/challengebyid')
+        .post(function(req,res){
+            ChallengeControllers.challengeByQueryId(req.body.challengeId,function(resultobj){
+                res.json(resultobj);
+            });
+        });
+
+
 };

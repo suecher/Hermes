@@ -66,8 +66,7 @@ module.exports = {
         }
     },
     challengeUpdate:function(obj,callback){
-        if( obj._id &&
-            obj.finish){
+        if( obj._id){
 
             //判断是否完结,完结更新信息
             if(obj.finish){
@@ -101,12 +100,27 @@ module.exports = {
                     return;
                 }
 
-                console.log(obj);
+                //console.log(obj);
 
                 callback(resultobj.createResult(true,null,null,data));
             });
         } else {
             callback(resultobj.createResult(false,'Required parameter missing','缺少必要信息,'));
         }
+    },
+    challengeByQueryId:function(challengeId,callback){
+        if(challengeId){
+            Challenge.findOne({_id:challengeId},function(err,doc){
+                if(err){
+                    resultobj.createResult(false,'SelectChallengeError','查询对战信息报错');
+                    return;
+                }
+
+                callback(resultobj.createResult(true,null,null,doc));
+            });
+        } else {
+            callback(resultobj.createResult(false,'Required parameter missing','缺少必要信息,'));
+        }
     }
+
 };

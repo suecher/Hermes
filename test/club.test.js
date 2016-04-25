@@ -14,5 +14,5 @@ ClubController.listByCityAll(177,function(result){
     console.log(result.body);
 });
 
-var ArcheriesScoreController = require('../app/controllers/archeriesScore.server.controller');
+var ArcheriesScoreController = require('../app/controllers/archeriesscore.server.controller.js');
 

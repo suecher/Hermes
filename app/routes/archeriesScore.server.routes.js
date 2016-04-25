@@ -4,7 +4,7 @@
 
 "use strict";
 
-var ArcheriesScoreController = require('../controllers/archeriesScore.server.controller');
+var ArcheriesScoreController = require('../controllers/archeriesscore.server.controller.js');
 var ClubController = require('../controllers/club.server.controller');
 
 

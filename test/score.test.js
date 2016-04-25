@@ -11,12 +11,12 @@ var mongodb = require('../config/mongoose');
 
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://121.43.57.99/hermes");
-require('../app/models/archeriesscore.server.model');
+require('../app/models/archeriesscore.server.model.js');
 require('../app/models/user.server.model');
 var ArcheriesScore = mongoose.model("ArcheriesScore");
 
 
-var ArcheriesScoreController = require('../app/controllers/archeriesScore.server.controller');
+var ArcheriesScoreController = require('../app/controllers/archeriesscore.server.controller.js');
 
 
 

@@ -21,7 +21,7 @@ module.exports = function(){
     require('../app/routes/user.server.routes')(app);
     require('../app/routes/areas.server.routes')(app);
     require('../app/routes/club.server.routes')(app);
-    require('../app/routes/archeriesScore.server.routes')(app);
+    require('../app/routes/archeriesscore.server.routes.js')(app);
     require('../app/routes/friend.server.routes')(app);
     require('../app/routes/uploadfiles.server.routes')(app);
     require('../app/routes/message.server.routes')(app);
@@ -30,7 +30,7 @@ module.exports = function(){
     require('../app/routes/clubfollow.server.routes')(app);
     require('../app/routes/security.server.routes')(app);
     require('../app/routes/test.server.routes')(app);
-    require('../app/routes/bowType.server.routes')(app);
+    require('../app/routes/bowtype.server.routes.js')(app);
     require('../app/routes/advert.server.routes')(app);
     require('../app/routes/challenge.server.routes')(app);
 

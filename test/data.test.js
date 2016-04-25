@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var ArcheriesScore = mongoose.model("ArcheriesScore");
 
 
-var ArcheriesScoreController = require('../app/controllers/archeriesScore.server.controller');
+var ArcheriesScoreController = require('../app/controllers/archeriesscore.server.controller.js');
 
 
 ArcheriesScoreController.scoreByUser('0002','2016-1-1','2016-3-27',function(objresult){

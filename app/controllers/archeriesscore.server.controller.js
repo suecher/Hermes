@@ -96,6 +96,21 @@ module.exports = {
             return;
         }
     },
+    scoreById:function(id,callback){
+        if(id){
+            ArcheriesScore.find({
+                "_id":id
+            },function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectScoreByIdinforError',err.message));
+                    return;
+                }
+                callback(resultobjs.createResult(true,'','',docs));
+            });
+        }else {
+            callback(resultobjs.createResult(false,'UserNotExist','成绩不存在'));
+        }
+    },
     scoreByUserAndDate:function(userId,startdate,enddate,callback){
         if(userId && startdate && enddate){
 
@@ -186,4 +201,6 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,clubId or arrowRoad or arrowCount'));
         }
     }
+
+
 };

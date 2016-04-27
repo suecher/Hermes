@@ -10,8 +10,8 @@ let ChallengeSchema = mongoose.Schema({
         userScoreId:{type:String,default:""},
         rivalScoreId:{type:String,default:""},
         arrowCount:Number,
-        totalPoint:{type:Number,default:0},
         arrowRoad:Number,
+        draw:{type:Boolean,default:false},
         finish:{type:Number,default:false},
         createTime:Date
 });

@@ -68,8 +68,9 @@ module.exports = {
     challengeUpdate:function(obj,callback){
         if( obj._id){
 
+
             //判断是否完结,完结更新信息
-            if(obj.finish){
+            if(obj.finish && !obj.draw){
 
                 if(!(obj.winnerId &&　obj.loserId)){
                     callback(resultobj.createResult(false,'UpdateChallengeError','缺少获胜者(winnerId)失败者信息(loserId) '));
@@ -98,9 +99,7 @@ module.exports = {
                 if(err){
                     callback(resultobj.createResult(false,'UpdateChallengeError','更新对战信息时报错'));
                     return;
-                }
-
-                //console.log(obj);
+                };
 
                 callback(resultobj.createResult(true,null,null,data));
             });

@@ -24,7 +24,6 @@ var ClupsSchema = new mongoose.Schema({
     memberSize: {type:Number,default:0},//会员数量
     operatorId: String,//操作人
     status: {type:Number,default:1},//状态 //0关闭 1开业 2停业
-    picture: {type:Boolean,default:false},//箭馆的场馆照片
     pictureList:[],//图片列表
     wifi: {type:Boolean,default:false},//是否有WIFI
     parking: Boolean,//是否有停车场

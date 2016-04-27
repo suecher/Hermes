@@ -98,4 +98,15 @@ module.exports = function(app){
                 res.json({result:false,errorType:'SubmitParameterError',errorMessage:'缺少必要参数'});
             }
         });
+
+    app.route('/scorebyId')     //根据成绩id获取成绩
+        .post(function(req,res){
+            ArcheriesScoreController.scoreById(req.body. id,function(resultobjs){
+                res.send(resultobjs);
+            });
+        });
+
+
+
+
 };

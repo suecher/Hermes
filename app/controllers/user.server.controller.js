@@ -227,14 +227,14 @@ module.exports = {
         }
     },
     updateBymobile:function(clientuser,callback){
-        if(clientuser.userId) {
+        if(clientuser.mobile) {
             User.update({mobile: clientuser.mobile}, {
                 $set: clientuser
             }, function (err, data) {
                 if (err) {
                     callback(resultobjs.createResult(false, 'UpdateUserScore', err.message));
                     return;
-                }
+                };
 
                 //判断是否修改了头像文件
                 if(clientuser.IsEditedPic){
@@ -252,13 +252,13 @@ module.exports = {
                     });
                 }
 
-                callback(resultobjs.createResult(true, '', '', data));
+                callback(resultobjs.createResult(true,null,null,data));
             });
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
         }
     },
-    list:function(req,res,next){
+    list:function(req,res){
         console.log(req.body);
         res.send('success');
     }

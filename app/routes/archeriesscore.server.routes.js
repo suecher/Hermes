@@ -56,6 +56,7 @@ module.exports = function(app){
                 clubrank.clubIdList = [req.body.clubId];
                 clubrank.arrowRoad = req.body.arrowRoad;
                 clubrank.arrowCount = req.body.arrowCount;
+                clubrank.bowType = req.body.bowType;
                 ArcheriesScoreController.scoreByClubRank(clubrank, function (resultobjes) {
                     res.json(resultobjes);
                 });
@@ -69,7 +70,8 @@ module.exports = function(app){
         .post(function(req,res){
             if(req.body.cityId &&
                 req.body.arrowRoad &&
-                req.body.arrowCount){
+                req.body.arrowCount &&
+                req.body.bowType){
                 let cityrank = {};
                 cityrank.cityId = req.body.cityId;
                 let clublist = [];
@@ -84,7 +86,7 @@ module.exports = function(app){
                         clubrank.clubIdList = clublist;
                         clubrank.arrowRoad = req.body.arrowRoad;
                         clubrank.arrowCount = req.body.arrowCount;
-
+                        clubrank.bowType = req.body.bowType;
                         ArcheriesScoreController.scoreByClubRank(clubrank, function (scoreResult) {
                             res.json(scoreResult);
                         });

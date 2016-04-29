@@ -141,7 +141,7 @@ module.exports = {
                 for(let item in scorelistobj){
                     let totalPoint = 0;
                     for(let scoreItem in scorelistobj[item]){
-                        scorelistobj[item][scoreItem].archeryList.map((n) => totalPoint = totalPoint + n);
+                        scorelistobj[item][scoreItem].archeryList.map((n) => totalPoint = totalPoint + parseInt(n));
                     }
 
                     scorelistarr.push({groupCount:scorelistobj[item].length,totalPoint:totalPoint,list:scorelistobj[item],date:item});
@@ -183,9 +183,10 @@ module.exports = {
                     var arrowcount = 0;
 
                     for(let scoreItem in clubuser[useritem]){
-                        totalpoint = totalpoint + clubuser[useritem][scoreItem].totalPoint;
-                        arrowcount = arrowcount + clubuser[useritem][scoreItem].arrowCount;
+                        totalpoint = totalpoint + parseInt(clubuser[useritem][scoreItem].totalPoint);
+                        arrowcount = arrowcount + parseInt(clubuser[useritem][scoreItem].arrowCount);
                     }
+                    console.log(totalpoint);
 
                     let avgerage = totalpoint/clubuser[useritem].length+(arrowcount * config.coefficient); //计算积分
                     let avgeragePoint = totalpoint/(clubuser[useritem].length * clubrank.arrowCount); //计算平均环数
@@ -195,7 +196,6 @@ module.exports = {
 
                 //console.log(clubscoreList);
                 callback(resultobjs.createResult(true,null,null,clubscoreList));
-
             });
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,clubId or arrowRoad or arrowCount'));

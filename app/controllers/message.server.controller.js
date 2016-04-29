@@ -121,8 +121,6 @@ module.exports = {
                         return;
                     }
 
-
-
                     let messageusertypelist = {}; // 临时存储用户消息,用于分类,方便之后删选最大日期的单条数据.返回到客户端.
                     let messagelist = []; // 存储
 
@@ -195,5 +193,31 @@ module.exports = {
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息,MessageID'));
         }
+    },
+    messageRemoveByFriend:function(currentuser,targetuser,callback){
+        if(currentuser && targetuser){
+
+            //目标用户删除当前用户的聊天记录
+            Message.remove({sendId:currentuser,receiveId:targetuser},function(err){
+                if(err){
+                    callback(resultobjs.createResult(false,'DeleteMsgError','删除当前用户发送给目标用户出错'));
+                    return;
+                }
+            });
+
+            //目标用户删除当前用户的聊天记录
+            Message.remove({sendId:targetuser,receiveId:currentuser},function(err){
+                if(err){
+                    callback(resultobjs.createResult(false,'DeleteMsgError','删除当前用户发送给目标用户出错'));
+                    return;
+                }
+            });
+
+            callback(resultobjs.createResult(true,null,null));
+
+        } else  {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要的信息,currentuser targetuser'));
+        }
+
     }
-}
+};

@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var Friend = mongoose.model('Friend');
 var resultobjs = require('../models/result.server.model');
+let MessageController = require('./message.server.controller');
 
 module.exports = {
     create:function(client,callback){
@@ -49,6 +50,10 @@ module.exports = {
                     callback(resultobjs.createResult(false,'SelectFrientError',err.message));
                     return;
                 }
+
+                MessageController.messageRemoveByFriend(userId,friendId,function(msgresult){
+                    console.log(msgresult);
+                });
 
                 callback(resultobjs.createResult(true,null,null));
             });

@@ -3,18 +3,18 @@
  */
 "use strict";
 var UserController = require('../controllers/user.server.controller');
+var securityManage = require('../../config/securityCodeManage');
 
 module.exports = function(app){
     app.route('/usersignin')
         .post(function(req,res){
-
             UserController.create(req.body,function(resultobjs){
                 res.json(resultobjs);
             });
         });
 
     app.route('/userlogin')
-        .post(function(req,res,next){
+        .post(function(req,res){
             UserController.login(req.body,function(resultobjs){
                 res.json(resultobjs);
             });
@@ -36,6 +36,20 @@ module.exports = function(app){
             });
         });
 
+    app.route('/useruppassword')
+        .post(function(req,res){
+            let code = req.body.code;
+            let clientuser = req.body;
+            if(!securityManage.verificationCode(clientuser.mobile,code).result){
+                res.json({result:false,errorType:'CodeError',errorMessage:"验证码错误"});
+            } else {
+                delete clientuser.code;
+                UserController.updateBymobile(clientuser,function(resultobj){
+                    res.json(resultobj);
+                });
+            };
+        });
+
     app.route('/userbyid')
         .post(function(req,res,next){
             UserController.userById(req.body.userId,function(resultobjs){
@@ -43,12 +57,6 @@ module.exports = function(app){
             });
         });
 
-    //app.route('/friendbyuserId')
-    //    .post(function(req,res){
-    //        UserController.userById(req.body.userId,function(resultobjs){
-    //            res.send(resultobjs);
-    //        });
-    //    });
 
     app.route('/userbymobile')
         .post(function(req,res){

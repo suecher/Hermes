@@ -10,6 +10,7 @@ var resultobjs = require('../models/result.server.model');
 var config = require('../../config/config');
 var securityManage = require('../../config/securityCodeManage');
 
+
 let Club = require('../controllers/club.server.controller');
 
 //用户根路径
@@ -50,6 +51,8 @@ module.exports = {
                         _callback(resultobjs.createResult(false,'CreateUserError',err.message));
                         return;
                     }
+
+
 
                 _callback(resultobjs.createResult(true,'','',user));
             });
@@ -201,6 +204,37 @@ module.exports = {
                     return;
                 }
 
+                //判断是否修改了头像文件
+                if(clientuser.IsEditedPic){
+                    //判断路径是否存在
+                    if(!fs.existsSync(userrootfolder + clientuser.userId)){
+                        fs.mkdirSync(userrootfolder + clientuser.userId);
+                    }
+
+                    fs.rename(tempfilefloder + clientuser.picture,userrootfolder + clientuser.userId +"/"+ clientuser.picture,function(err){
+                        if(err){
+                            //可能存在错误
+                            console.log(err);
+                            return;
+                        }
+                    });
+                }
+
+                callback(resultobjs.createResult(true, '', '', data));
+            });
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
+        }
+    },
+    updateBymobile:function(clientuser,callback){
+        if(clientuser.userId) {
+            User.update({mobile: clientuser.mobile}, {
+                $set: clientuser
+            }, function (err, data) {
+                if (err) {
+                    callback(resultobjs.createResult(false, 'UpdateUserScore', err.message));
+                    return;
+                }
 
                 //判断是否修改了头像文件
                 if(clientuser.IsEditedPic){

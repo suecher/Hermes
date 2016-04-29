@@ -4,20 +4,23 @@
 "use strict";
 
 let moment = require('moment');
-
+let sms = require('./sms');
 module.exports = {
 
     createUserCode:function(mobile){
+        let code = this.createSecurityCode();
         if(mobile in this.securityList){
             delete this.securityList[mobile];
-            this.securityList[mobile] = {time:Date.now(),code:this.createSecurityCode()}
+            this.securityList[mobile] = {time:Date.now(),code}
         } else {
-            this.securityList[mobile] = {time:Date.now(),code:this.createSecurityCode()}
+
+            this.securityList[mobile] = {time:Date.now(),code}
         }
+        console.log(mobile);
+        sms(mobile,code);
     },
     createSecurityCode:function(){
         let code = "";
-
         for(let i=0;i<6;i++){
             code += Math.floor(Math.random()*10);
         }
@@ -38,7 +41,6 @@ module.exports = {
         }
     },
     timer:function(){
-
         let securityList = this.securityList;
         setInterval(function(){
             for(let item in securityList){

@@ -6,8 +6,7 @@ var app = require('../app');
 var config = require('../config/config.js');
 var securityManage = require('../config/securityCodeManage');
 
-app.listen(config.port,'192.168.1.179',function(){
+app.listen(config.port,'192.168.1.254',function(){
     console.log('app started, listening on port:',config.port);
     securityManage.timer();
 });
-

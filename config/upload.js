@@ -26,8 +26,6 @@ module.exports = {
              fs.mkdirSync(userpath);
          };
 
-         console.log('....');
-
         var form = new multiparty.Form({uploadDir:userpath});
             form.maxFilesSize = 2 * 1024 * 1024;
             form.uploadDir = userpath;

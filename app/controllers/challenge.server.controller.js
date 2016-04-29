@@ -52,13 +52,12 @@ module.exports = {
         }
     },
     challengeByQuery:function(obj,callback){
-        if(obj.userId || obj.rivalId){
-            Challenge.find(obj,function(err,docs){
+        if(obj.userId){
+            Challenge.find({"$or":[{userId:obj.userId},{rivalId:obj.userId}]},function(err,docs){
                 if(err){
                     resultobj.createResult(false,'SelectChallengeError','查询对战信息报错');
                     return;
                 }
-
                 callback(resultobj.createResult(true,null,null,docs));
             });
         } else {
@@ -67,7 +66,6 @@ module.exports = {
     },
     challengeUpdate:function(obj,callback){
         if( obj._id){
-
 
             //判断是否完结,完结更新信息
             if(obj.finish && !obj.draw){

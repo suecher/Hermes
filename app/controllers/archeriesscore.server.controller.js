@@ -8,6 +8,8 @@ var ArcheriesScore = mongoose.model("ArcheriesScore");
 var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
 var fs = require('fs');
+let HonorUserController = require('../controllers/honorbyuser.server.controller');
+
 var config = require('../../config/config');
 
 //用户根路径
@@ -56,6 +58,7 @@ module.exports = {
                     UserController.update(user,function(updatescoreresult){
                         //console.log(updatescoreresult);
                     });
+
 
                     score.save(function(err){
                         if(err){

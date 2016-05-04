@@ -34,7 +34,9 @@ module.exports = {
             var filesTmp = JSON.stringify(files,null,2);
 
             if(err){
+                console.log(err);
                 callback(resultobj.createResult(false,'UploadUserPictrueError.Uploading',err));
+                return;
             } else {
                 //console.log('ares files:' + filesTmp);
                 //确认 Content-Disposition: form-data; name="fieldNameHere"; filename="filename" 文件名

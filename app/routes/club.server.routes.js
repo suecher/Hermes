@@ -14,7 +14,6 @@ module.exports = function(app){
         .post(function(req,res,next){
             var cityId =req.body.cityId;
             var pagination = req.body.pagination;
-
             ClubControllers.listByCity(cityId,pagination,function(resultobjs){
                 res.json(resultobjs);
             });

@@ -20,7 +20,6 @@ module.exports = function(app){
             });
         });
 
-
     app.route('/removefriend')
         .post(function(req,res){
             FriendController.removefriend(req.body.userId,req.body.friendId,function(resultobjs){

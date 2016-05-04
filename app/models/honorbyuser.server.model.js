@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 var HonorByUserSchema = new mongoose.Schema({
     honorType:Number,
-    honorId:String,
+    honorId:Number,
     describe:String,
     userId:String,
     level:{Type:Number,default:0},

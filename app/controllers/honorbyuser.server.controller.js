@@ -24,7 +24,7 @@ module.exports = {
                     return;
                 }
 
-                callback(resultobjs.createResult(true,'','',honor));
+                callback(resultobjs.createResult(true,null,null,honor));
             });
 
         } else {
@@ -66,7 +66,6 @@ module.exports = {
                     let currentUser = resultUser.body;
                     //通过用户ID获取现有成就
 
-
                     honorByUser(userId,function(resultHonor){
                         if(resultHonor.result){
 
@@ -78,7 +77,7 @@ module.exports = {
 
                             //执行完成数组.
                             //let execresult = {"A1":"false","B1":"false","B2":"false","B3":"false","C1":"false","C2":"false","C3":"false","D1":"false","D2":"false","D3":"false","E1":"false","E2":"false","E3":"false","F1":"false","G1":"false","G2":"false","G3":"false","H1":"false","H2":"false","H3":"false","J1":"false","J2":"false","J3":"false"}
-                            let execresult = {"B1":"false","B2":"false"};
+                            let execresult = {"2":"false","3":"false"};
 
                             //遍历当前用户的获取的成就,如果没有当前成就就进行验证
 
@@ -88,16 +87,16 @@ module.exports = {
                             //
                             //}
 
-                            if(currentHonor.indexOf('B1') == -1){
+                            if(currentHonor.indexOf(2) == -1){
                                 FriendController.getfriend(userId,function(resultFriend){
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 3){
                                             //获得此B1成就 关注3名好友
-                                            createHonor({honorType:1,honorId:"B1",userId:userId},function(addHonorResult){
+                                            createHonor({honorType:1,honorId:2,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
-                                                    execresult["B1"] = true;
-                                                    clientHonor.push("B1");
+                                                    execresult["2"] = true;
+                                                    clientHonor.push({honorId:2});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }
@@ -110,16 +109,16 @@ module.exports = {
                             }
 
 
-                            if(currentHonor.indexOf('B2') == -1){
+                            if(currentHonor.indexOf(3) == -1){
                                 FriendController.getfriend(userId,function(resultFriend){
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 10){
                                             //获得此B2成就 关注10名好友
-                                            createHonor({honorType:1,honorId:"B2",userId:userId},function(addHonorResult){
+                                            createHonor({honorType:1,honorId:3,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
-                                                    execresult["B2"] = true;
-                                                    clientHonor.push("B2");
+                                                    execresult["3"] = true;
+                                                    clientHonor.push({honorId:3});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }
@@ -131,16 +130,16 @@ module.exports = {
                                 });
                             }
 
-                            if(currentHonor.indexOf('B3') == -1){
+                            if(currentHonor.indexOf(4) == -1){
                                 FriendController.getfriend(userId,function(resultFriend){
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 30){
                                             //获得此B3成就 关注10名好友
-                                            createHonor({honorType:1,honorId:"B3",userId:userId},function(addHonorResult){
+                                            createHonor({honorType:1,honorId:4,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
-                                                    execresult["B3"] = true;
-                                                    clientHonor.push("B3");
+                                                    execresult["4"] = true;
+                                                    clientHonor.push({honorId:4});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }

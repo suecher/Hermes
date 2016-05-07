@@ -8,6 +8,7 @@ var HonorByUser = mongoose.model('HonorByUser');
 var resultobjs = require('../models/result.server.model');
 let UserController = require('../controllers/user.server.controller');
 let FriendController = require('../controllers/friend.server.controller');
+let ArcheriesScoreController = require('../controllers/archeriesscore.server.controller');
 var async = require('async');
 
 module.exports = {
@@ -81,7 +82,6 @@ module.exports = {
 
                             //遍历当前用户的获取的成就,如果没有当前成就就进行验证
 
-
                             //判断是否拥有A1荣誉,如果拥有不做处理,如果没有判断是否已满足条件.满足了的话.进行更新操作
                             //if(currentHonor.indexOf('A1') == -1){
                             //
@@ -92,11 +92,11 @@ module.exports = {
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 3){
                                             //获得此B1成就 关注3名好友
-                                            createHonor({honorType:1,honorId:2,userId:userId},function(addHonorResult){
+                                            createHonor({honorId:2,honorType:1,sort:2,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
                                                     execresult["2"] = true;
-                                                    clientHonor.push({honorId:2});
+                                                    clientHonor.push({honorId:2,honorType:1,sort:2});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }
@@ -108,17 +108,16 @@ module.exports = {
                                 });
                             }
 
-
                             if(currentHonor.indexOf(3) == -1){
                                 FriendController.getfriend(userId,function(resultFriend){
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 10){
                                             //获得此B2成就 关注10名好友
-                                            createHonor({honorType:1,honorId:3,userId:userId},function(addHonorResult){
+                                            createHonor({honorId:3,honorType:2,sort:2,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
                                                     execresult["3"] = true;
-                                                    clientHonor.push({honorId:3});
+                                                    clientHonor.push({honorId:3,honorType:2,sort:2});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }
@@ -135,11 +134,11 @@ module.exports = {
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 30){
                                             //获得此B3成就 关注10名好友
-                                            createHonor({honorType:1,honorId:4,userId:userId},function(addHonorResult){
+                                            createHonor({honorId:4,honorType:2,sort:3,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
                                                     execresult["4"] = true;
-                                                    clientHonor.push({honorId:4});
+                                                    clientHonor.push({honorId:4,honorType:2,sort:3});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }
@@ -150,6 +149,11 @@ module.exports = {
                                     }
                                 });
                             }
+
+                            if(currentHonor.indexOf(5) == -1){
+
+                            }
+
 
 
 
@@ -226,7 +230,6 @@ module.exports = {
                             //        }
                             //    });
                             //}
-
 
                             //callback(resultobjs.createResult(true,null,null,clientHonor));
 

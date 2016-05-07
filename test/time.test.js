@@ -19,3 +19,12 @@ let moment = require('moment');
 
 
 console.log(moment(moment.utc()).format('YYYY-MM-DD HH:mm Z'));
+
+
+var a = moment([2007, 0, 28]);
+var b = moment([2007, 0, 29]);
+
+
+console.log(moment("2010-1-1"));
+
+console.log(a.to(b));

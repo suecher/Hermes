@@ -68,11 +68,15 @@ module.exports = {
 
                         //判断是否有图片
                         if(clientscore.picture){
-                            //var folder_exists = fs.existsSync(config.tempfolder);
+
                             if(!fs.existsSync(userrootfolder + clientscore.userId)){
                                 fs.mkdirSync(userrootfolder + clientscore.userId);
                                 fs.mkdirSync(userrootfolder + clientscore.userId + "/score/");
                             }
+
+                            if(!fs.existsSync(userrootfolder + clientscore.userId + "/score/")){
+                                fs.mkdirSync(userrootfolder + clientscore.userId + "/score/");
+                            };
 
                             fs.rename(tempfilefloder + clientscore.picture,userrootfolder + clientscore.userId + "/score/" + clientscore.picture,function(err){
                                 if(err){
@@ -163,7 +167,7 @@ module.exports = {
             ){
 
             //在哪个俱乐部射的。就属于哪个俱乐部的成绩
-            ArcheriesScore.find({clubId:{"$in":clubrank.clubIdList},arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad},function(err,docs){
+            ArcheriesScore.find({clubId:{"$in":clubrank.clubIdList},arrowCount:clubrank.arrowCount,arrowRoadStandard:clubrank.arrowRoad,bowType:clubrank.bowType},function(err,docs){
                 if(err){
                     callback(resultobjs.createResult(false,'ClubRankSelectError','查询出错'));
                     return;

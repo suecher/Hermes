@@ -20,6 +20,14 @@ module.exports = function(app){
             });
         });
 
+    app.route('/getfriendsclubs')
+        .post(function(req,res){
+            FriendController.getfriendclub(req.body.userId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
+
+
     app.route('/removefriend')
         .post(function(req,res){
             FriendController.removefriend(req.body.userId,req.body.friendId,function(resultobjs){

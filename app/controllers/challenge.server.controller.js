@@ -10,13 +10,13 @@ let resultobj = require('../models/result.server.model');
 
 module.exports = {
     create:function(challenge,callback){
+        console.log(challenge);
         if(challenge.userId &&
             challenge.rivalId &&
             challenge.arrowCount &&
             challenge.arrowRoad){
             challenge.createTime = Date.now();
-
-
+            
             //challenge.userScoreId = null;
             //challenge.rivalScoreId= null;
 

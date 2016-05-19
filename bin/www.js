@@ -6,6 +6,12 @@ var app = require('../app');
 var config = require('../config/config.js');
 var securityManage = require('../config/securityCodeManage');
 
+
+process.on('uncaughtException',function (err){
+    console.log(err);
+    console.log(err.stack);
+});
+
 app.listen(config.port,'192.168.1.254',function(){
     console.log('app started, listening on port:',config.port);
     securityManage.timer();

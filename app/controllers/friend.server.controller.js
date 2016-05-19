@@ -4,11 +4,12 @@
 "use strict";
 
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Friend = mongoose.model('Friend');
-var resultobjs = require('../models/result.server.model');
+let Friend = mongoose.model('Friend');
+let resultobjs = require('../models/result.server.model');
 let MessageController = require('./message.server.controller');
+let UserController = require('../controllers/user.server.controller');
 
 module.exports = {
     create:function(client,callback){
@@ -37,6 +38,46 @@ module.exports = {
                 }
 
                 callback(resultobjs.createResult(true,'','',docs));
+            });
+        }else{
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少用户的ID'));
+            return;
+        }
+    },
+    getfriendclub:function(userId,callback){
+        if(userId){
+            let clientFriend = [];
+            Friend.find({"userId":userId},function(err,friends){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectFrientError',err.message));
+                    return;
+                }
+
+                UserController.userById(userId,function(resultUser){
+                    if(resultUser.result){
+                        let currentuser = resultUser.body;
+                        let clubId = currentuser.clubId;
+
+                        UserController.userByClubId(clubId,function(resultClubUser){
+                            if(resultClubUser.result){
+                                let clubuserList = resultClubUser.body;
+
+                                for(let firedItem of friends){
+                                    clientFriend.push({_id:firedItem._id,friendId:firedItem.friendId,userId:firedItem.userId,isClubUser:false});
+                                }
+
+                                for(let clubuserItem of clubuserList){
+                                    clientFriend.push({_id:'',friendId:clubuserItem._id,userId:userId,isClubUser:true});
+                                }
+
+                                callback(resultobjs.createResult(true,'','',clientFriend));
+                            };
+                        });
+
+
+                    }
+                });
+
             });
         }else{
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户的ID'));

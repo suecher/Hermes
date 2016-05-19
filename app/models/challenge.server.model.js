@@ -11,6 +11,7 @@ let ChallengeSchema = mongoose.Schema({
         rivalScoreId:{type:String,default:""},
         arrowCount:Number,
         arrowRoad:Number,
+        arrowType:Number,
         draw:{type:Boolean,default:false},
         finish:{type:Number,default:false},
         createTime:Date

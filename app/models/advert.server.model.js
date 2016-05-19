@@ -8,7 +8,8 @@ let AdvertSchema = new mongoose.Schema({
     url:String,
     type:Number,//1为俱乐部通知 2为平台通知
     picture:String,
-    createTime:Date
+    createTime:Date,
+    top:{type:Boolean,default:false}
 });
 
 let Advert = mongoose.model('Advert',AdvertSchema);

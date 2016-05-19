@@ -7,6 +7,7 @@
 var mongoose = require('mongoose');
 var Message = mongoose.model('Message');
 let moment = require('moment');
+let push = require('../../config/push.config');
 
 var resultobjs = require('../models/result.server.model');
 
@@ -20,17 +21,31 @@ module.exports = {
             clientMessage.createTime = Date.now();
             let message = Message(clientMessage);
 
+
+
             //判断是否为好友请求消息或对战消息 如果是这两种消息。判断是否存在。。如果已存在。不重复添加
             if(clientMessage.messageType == 4 || clientMessage.messageType == 6){
                 this.messageExist({sendId:clientMessage.sendId,receiveId:clientMessage.receiveId,messageType:clientMessage.messageType},function(resultobj){
                     if(!resultobj.result){
                         message.save(function(err){
-                                if(err){
-                                    callback(resultobjs.createResult(false,'AddMessageError',err.message));
-                                    return;
-                                }
-                                callback(resultobjs.createResult(true,'','',message));
-                            });
+                            if(err){
+                                callback(resultobjs.createResult(false,'AddMessageError',err.message));
+                                return;
+                            }
+
+                            if(clientMessage.messageType == 6){
+                                push(clientMessage.receiveId,'您收到一个好友请求.');
+                            }
+
+                            if(clientMessage.messageType == 4){
+                                push(clientMessage.receiveId,'您收到一封挑战书.');
+                            }
+
+                            callback(resultobjs.createResult(true,'','',message));
+
+
+
+                        });
 
                     } else {
                         callback(resultobjs.createResult(false,'MsgExist',"请求信息已存在"));
@@ -41,6 +56,14 @@ module.exports = {
                     if(err){
                         callback(resultobjs.createResult(false,'AddMessageError',err.message));
                         return;
+                    }
+
+                    if(clientMessage.messageType == 1){
+                        push(clientMessage.receiveId,'您收到一条新的留言信息.');
+                    }
+
+                    if(clientMessage.messageType == 2 || clientMessage.messageType == 3){
+                        push(clientMessage.receiveId,'您收到一条新的活动信息.');
                     }
 
                     callback(resultobjs.createResult(true,'','',message));

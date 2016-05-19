@@ -8,7 +8,8 @@ var HonorByUser = mongoose.model('HonorByUser');
 var resultobjs = require('../models/result.server.model');
 let UserController = require('../controllers/user.server.controller');
 let FriendController = require('../controllers/friend.server.controller');
-let ArcheriesScoreController = require('../controllers/archeriesscore.server.controller');
+let ScoreController = require('../controllers/archeriesscore.server.controller');
+let moment = require('moment');
 var async = require('async');
 
 module.exports = {
@@ -78,7 +79,7 @@ module.exports = {
 
                             //执行完成数组.
                             //let execresult = {"A1":"false","B1":"false","B2":"false","B3":"false","C1":"false","C2":"false","C3":"false","D1":"false","D2":"false","D3":"false","E1":"false","E2":"false","E3":"false","F1":"false","G1":"false","G2":"false","G3":"false","H1":"false","H2":"false","H3":"false","J1":"false","J2":"false","J3":"false"}
-                            let execresult = {"2":"false","3":"false"};
+                            let execresult = {"2":"false","3":"false","4":"false","5":"false","6":"false","7":"false","8":"false"};
 
                             //遍历当前用户的获取的成就,如果没有当前成就就进行验证
 
@@ -150,15 +151,196 @@ module.exports = {
                                 });
                             }
 
-                            if(currentHonor.indexOf(5) == -1){
 
+                            if(currentHonor.indexOf(5) == -1){
+                                ScoreController.scoreByUserId(userId,1,function(resultUserScore){
+                                    if(resultUserScore.result){
+
+                                        let continuous = "";
+                                        let arr = resultUserScore.body;
+
+                                        arr.forEach(function(value,key){
+                                            if(arr[key+1] != undefined) {
+                                                continuous += moment(value.createTime).diff(arr[key+1].createTime,'day').toString();
+
+                                            }
+                                        });
+
+                                        //判断是否存在两个-1 存在的话就是连续两天射箭了.
+                                        if(continuous.indexOf("-1-1") != -1){
+                                            createHonor({honorId:5,honorType:1,sort:3,userId:userId},function(addHonorResult){
+                                                if(addHonorResult.result){
+                                                    //成功插入成就
+                                                    execresult["5"] = true;
+                                                    clientHonor.push({honorId:5,honorType:1,sort:3});
+                                                } else {
+                                                    console.log('验证完好友成就,插入成就时报错');
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
                             }
 
 
+                            if(currentHonor.indexOf(6) == -1){
+                                ScoreController.scoreByUserId(userId,1,function(resultUserScore){
+                                    if(resultUserScore.result){
+
+                                        let continuous = "";
+                                        let arr = resultUserScore.body;
+
+                                        arr.forEach(function(value,key){
+                                            if(arr[key+1] != undefined) {
+                                                continuous += moment(value.createTime).diff(arr[key+1].createTime,'day').toString();
+
+                                            }
+                                        });
+
+                                        //判断是否存在6个-1 存在的话就是连续七天射箭了.
+                                        if(continuous.indexOf("-1-1-1-1-1-1") != -1){
+                                            createHonor({honorId:6,honorType:2,sort:3,userId:userId},function(addHonorResult){
+                                                if(addHonorResult.result){
+                                                    //成功插入成就
+                                                    execresult["6"] = true;
+                                                    clientHonor.push({honorId:6,honorType:2,sort:3});
+                                                } else {
+                                                    console.log('验证完好友成就,插入成就时报错');
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+
+                            if(currentHonor.indexOf(7) == -1){
+                                ScoreController.scoreByUserId(userId,1,function(resultUserScore){
+                                    if(resultUserScore.result){
+
+                                        let continuous = "";
+                                        let arr = resultUserScore.body;
+
+                                        arr.forEach(function(value,key){
+                                            if(arr[key+1] != undefined) {
+                                                continuous += moment(value.createTime).diff(arr[key+1].createTime,'day').toString();
+
+                                            }
+                                        });
+
+                                        //判断是否存在6个-1 存在的话就是连续七天射箭了.
+                                        if(continuous.indexOf("-1-1-1-1-1-1-1-1-1-1-1-1-1-1") != -1){
+                                            createHonor({honorId:7,honorType:3,sort:3,userId:userId},function(addHonorResult){
+                                                if(addHonorResult.result){
+                                                    //成功插入成就
+                                                    execresult["7"] = true;
+                                                    clientHonor.push({honorId:7,honorType:3,sort:3});
+                                                } else {
+                                                    console.log('验证完好友成就,插入成就时报错');
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+
+                            if(currentHonor.indexOf(8) == -1){
+                                ScoreController.scoreByUserId(userId,1,function(resultUserScore){
+                                    if(resultUserScore.result){
+
+                                        let continuous = "";
+                                        let arr = resultUserScore.body;
+
+                                        arr.forEach(function(value,key){
+                                            if(arr[key+1] != undefined) {
+                                                continuous += moment(value.createTime).diff(arr[key+1].createTime,'day').toString();
+
+                                            }
+                                        });
+
+                                        //判断是否存在6个-1 存在的话就是连续七天射箭了.
+                                        if(continuous.indexOf("-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1") != -1){
+                                            createHonor({honorId:8,honorType:3,sort:4,userId:userId},function(addHonorResult){
+                                                if(addHonorResult.result){
+                                                    //成功插入成就
+                                                    execresult["8"] = true;
+                                                    clientHonor.push({honorId:8,honorType:3,sort:4});
+                                                } else {
+                                                    console.log('验证完好友成就,插入成就时报错');
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+
+                            //小喇叭
+                            if(currentHonor.indexOf(12) == -1){
+                                if(currentUser.share >= 2){
+                                    execresult["12"] = true;
+                                    clientHonor.push({honorId:12,honorType:1,sort:5});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(13) == -1){
+                                if(currentUser.share >= 5){
+                                    execresult["12"] = true;
+                                    clientHonor.push({honorId:12,honorType:2,sort:5});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(14) == -1){
+                                if(currentUser.share >= 10){
+                                    execresult["12"] = true;
+                                    clientHonor.push({honorId:12,honorType:3,sort:5});
+                                }
+                            }
+
+                            //百矢及的
+                            if(currentHonor.indexOf(16) == -1){
+                                if(currentUser.arrowCount >= 100){
+                                    execresult["16"] = true;
+                                    clientHonor.push({honorId:16,honorType:1,sort:7});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(17) == -1){
+                                if(currentUser.arrowCount >= 1000){
+                                    execresult["17"] = true;
+                                    clientHonor.push({honorId:17,honorType:2,sort:7});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(18) == -1){
+                                if(currentUser.arrowCount >= 10000){
+                                    execresult["18"] = true;
+                                    clientHonor.push({honorId:18,honorType:3,sort:7});
+                                }
+                            }
+
+                            //环数
+                            if(currentHonor.indexOf(23) == -1){
+                                if(currentUser.totalPoint >= 5000){
+                                    execresult["23"] = true;
+                                    clientHonor.push({honorId:23,honorType:1,sort:10});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(24) == -1){
+                                if(currentUser.totalPoint >= 10000){
+                                    execresult["24"] = true;
+                                    clientHonor.push({honorId:24,honorType:2,sort:10});
+                                }
+                            }
+
+                            if(currentHonor.indexOf(25) == -1){
+                                if(currentUser.totalPoint >= 20000){
+                                    execresult["25"] = true;
+                                    clientHonor.push({honorId:25,honorType:3,sort:10});
+                                }
+                            }
 
 
                             let finish = false;
-
                             let interval = setInterval(function() {
                                 console.log(execresult);
                                 console.log(clientHonor);
@@ -179,8 +361,6 @@ module.exports = {
                                 }
 
                             }, 300);
-
-
 
 
                             ////B1

@@ -66,6 +66,7 @@ module.exports = function(app){
         });
 
 
+
     app.route('/rankingbycity')
         .post(function(req,res){
             if(req.body.cityId &&

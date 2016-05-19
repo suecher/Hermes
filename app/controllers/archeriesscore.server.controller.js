@@ -8,7 +8,6 @@ var ArcheriesScore = mongoose.model("ArcheriesScore");
 var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
 var fs = require('fs');
-let HonorUserController = require('../controllers/honorbyuser.server.controller');
 
 var config = require('../../config/config');
 
@@ -116,6 +115,27 @@ module.exports = {
             });
         }else {
             callback(resultobjs.createResult(false,'UserNotExist','成绩不存在'));
+        }
+    },
+    /**
+     *
+     * @param userId
+     * @param sorting
+     * @param callback
+     */
+    scoreByUserId:function(userId,sorting,callback){
+        if(userId){
+            ArcheriesScore.find({userId:userId}).sort({createTime:sorting}).exec(function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectScoreError',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,'','',docs));
+
+            });
+        } else {
+            callback(resultobjs.createResult(false,'UserIdNotExist','缺少参数.,用户ID不存在'));
         }
     },
     scoreByUserAndDate:function(userId,startdate,enddate,callback){

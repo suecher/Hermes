@@ -106,11 +106,27 @@ module.exports = {
                     callback(resultobjs.createResult(false,'UserNotExist','用户不存在'));
                 }
 
-            })
+            });
 
         }
         else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
+            return;
+        }
+    },
+    userByClubId:function(clubId,callback){
+        if(clubId){
+            User.find({clubId:clubId},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectUserError',err.message));
+                    return;
+                }
+
+                callback(resultobjs.createResult(true,'','',docs));
+
+            });
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少俱乐部ID'));
             return;
         }
     },

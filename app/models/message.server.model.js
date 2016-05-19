@@ -4,9 +4,9 @@
 
 "use strict";
 let moment = require('moment');
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var MessageSchema = new mongoose.Schema({
+let MessageSchema = new mongoose.Schema({
     sendId:String, //发送者ID
     receiveId:String, //接收者ID
     subject:String, // 主题
@@ -19,4 +19,4 @@ var MessageSchema = new mongoose.Schema({
     createTime:Date
 });
 
-var Message = mongoose.model('Message',MessageSchema);
+let Message = mongoose.model('Message',MessageSchema);

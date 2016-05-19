@@ -31,7 +31,9 @@ var UserSchema = new mongoose.Schema({
     challengeNum:{type:Number,default:0}, //挑战次数
     Refusing:{type:Number,default:0},//拒绝挑战的次数
     rankPoint:String,//排名成绩
+    share:{type:Number,default:0},//分享次数
     visibleGrade:Boolean, //是否可以看成绩
+    bowType:{type:Number,default:1},//弓类型
     defaultArrowCount:{type:Number,default:10},//默认箭数
     defaultArrowRoad:{type:Number,default:12},//默认使用的箭道长度
     lastArcheryTime:{type:Date,default:Date.now()},//最后一次射箭的时间(记录成绩的时间)

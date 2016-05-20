@@ -135,7 +135,7 @@ module.exports = {
                                     if(resultFriend.result){
                                         if(resultFriend.body.length >= 30){
                                             //获得此B3成就 关注10名好友
-                                            createHonor({honorId:4,honorType:2,sort:3,userId:userId},function(addHonorResult){
+                                            createHonor({honorId:4,honorType:3,sort:2,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
                                                     execresult["4"] = true;
@@ -261,11 +261,11 @@ module.exports = {
                                         //判断是否存在6个-1 存在的话就是连续七天射箭了.
                                         console.log(continuous);
                                         if(continuous.indexOf("-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-") != -1){
-                                            createHonor({honorId:8,honorType:3,sort:4,userId:userId},function(addHonorResult){
+                                            createHonor({honorId:8,honorType:4,sort:3,userId:userId},function(addHonorResult){
                                                 if(addHonorResult.result){
                                                     //成功插入成就
                                                     execresult["8"] = true;
-                                                    clientHonor.push({honorId:8,honorType:3,sort:4});
+                                                    clientHonor.push({honorId:8,honorType:4,sort:3});
                                                 } else {
                                                     console.log('验证完好友成就,插入成就时报错');
                                                 }

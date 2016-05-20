@@ -66,6 +66,14 @@ module.exports = function(app){
         });
 
 
+    /**
+     * 用来呈现用户分享是成绩
+     */
+    app.route('/sharescore/:id')
+        .get(function(req,res){
+            res.send('user:' + req.params.id);
+        });
+
 
     app.route('/rankingbycity')
         .post(function(req,res){

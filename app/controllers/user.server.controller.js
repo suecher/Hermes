@@ -83,6 +83,7 @@ module.exports = {
     },
     //对所有数值型进行增加或减少操作；
     userUpdateNumType:function(userId,obj,callback){
+
         User.update({_id:userId},{$inc:obj},function(err,data){
             if(err){
                 callback(resultobjs.createResult(false,'UpdateUserScore',err.message));
@@ -107,7 +108,6 @@ module.exports = {
                 }
 
             });
-
         }
         else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));

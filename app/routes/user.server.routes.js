@@ -65,6 +65,13 @@ module.exports = function(app){
             });
         });
 
+    app.route('/usershare')
+        .post(function(req,res){
+            UserController.userUpdateNumType(req.body.userId,{share:1},function(resultobj){
+                res.send(resultobj);
+            });
+        });
+
     app.route('/userfriends')
         .post(UserController.list);
 

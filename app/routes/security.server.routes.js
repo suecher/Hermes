@@ -28,6 +28,7 @@ module.exports = function(app){
 
     app.route('/securitylist')
         .get(function(req,res){
+            console.log(securityManage.securityList);
             res.json(securityManage.securityList);
         });
 };

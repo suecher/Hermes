@@ -68,6 +68,7 @@ module.exports = {
                     let currentUser = resultUser.body;
                     //通过用户ID获取现有成就
 
+                    //通过USERID获取当前这个用户已经取得哪些荣誉
                     honorByUser(userId,function(resultHonor){
                         if(resultHonor.result){
 
@@ -227,7 +228,7 @@ module.exports = {
                                             }
                                         });
 
-
+                                        console.log(continuous);
                                         //判断是否存在6个-1 存在的话就是连续七天射箭了.
                                         if(continuous.indexOf("-1-1-1-1-1-1-1-1-1-1-1-1-1-1-") != -1){
                                             createHonor({honorId:7,honorType:3,sort:3,userId:userId},function(addHonorResult){
@@ -307,9 +308,6 @@ module.exports = {
                                             console.log('验证完好友成就,插入成就时报错');
                                         }
                                     });
-
-
-
                                 }
                             }
 
@@ -342,8 +340,6 @@ module.exports = {
                                         }
                                     });
 
-
-
                                 }
                             }
 
@@ -364,8 +360,6 @@ module.exports = {
 
                             if(currentHonor.indexOf(18) == -1){
                                 if(currentUser.arrowCount >= 10000){
-
-
                                     createHonor({honorId:18,honorType:3,sort:7,userId:userId},function(addHonorResult){
                                         if(addHonorResult.result){
                                             //成功插入成就
@@ -375,8 +369,6 @@ module.exports = {
                                             console.log('验证完好友成就,插入成就时报错');
                                         }
                                     });
-
-
                                 }
                             }
 

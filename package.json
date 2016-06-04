@@ -8,25 +8,25 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/suecher/Hermes.git"
-  },
-  "author": "scan",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/suecher/Hermes/issues"
-  },
-  "homepage": "https://github.com/suecher/Hermes#readme",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4",
-    "jpush-sdk": "^3.2.1",
-    "moment": "^2.12.0",
-    "mongoose": "^4.4.5",
-    "multiparty": "^4.1.2",
-    "node-uuid": "^1.4.7",
-    "request": "^2.72.0"
-  }
+},
+"repository": {
+"type": "git",
+"url": "git+https://github.com/suecher/Hermes.git"
+},
+"author": "scan",
+"license": "ISC",
+"bugs": {
+"url": "https://github.com/suecher/Hermes/issues"
+},
+"homepage": "https://github.com/suecher/Hermes#readme",
+"dependencies": {
+"body-parser": "^1.15.0",
+"express": "^4.13.4",
+"jpush-sdk": "^3.2.1",
+"moment": "^2.12.0",
+"mongoose": "^4.4.5",
+"multiparty": "^4.1.2",
+"node-uuid": "^1.4.7",
+"request": "^2.72.0"
+}
 }

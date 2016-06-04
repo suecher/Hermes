@@ -11,6 +11,11 @@ module.exports = function(app){
             });
         });
 
+    app.route('/advert')
+        .get(function(req,res){
+            res.json(req.query);
+        });
+
     app.route('/advertbycity')
         .post(function(req,res){
 

@@ -13,6 +13,7 @@ module.exports = function(app){
             });
         });
 
+
     app.route('/userlogin')
         .post(function(req,res){
             UserController.login(req.body,function(resultobjs){

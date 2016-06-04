@@ -11,10 +11,12 @@ var MessageController = require('../controllers/message.server.controller');
 module.exports = function(app){
     app.route('/createmessage')
         .post(function(req,res){
-            var clientmessage = req.body;
-            MessageController.create(clientmessage,function(resultobjs){
-                res.json(resultobjs);
-            });
+            console.log(req.body);
+            //var clientmessage = req.body;
+            //MessageController.create(clientmessage,function(resultobjs){
+            //    res.json(resultobjs);
+            //});
+            res.json('gaga');
         });
 
 

@@ -26,7 +26,6 @@ module.exports = {
                 callback(resultobj.createResult(true,null,null,advertobj));
             });
 
-
         } else {
             callback(resultobj.createResult(false,'Required parameter missing','缺少必要信息,'));
         }

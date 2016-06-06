@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/3/8.
  */
 
-var ClubControllers = require('../controllers/club.server.controller');
+let ClubControllers = require('../controllers/club.server.controller');
 
 module.exports = function(app){
     app.route('/clublist')
@@ -17,6 +17,17 @@ module.exports = function(app){
             ClubControllers.listByCity(cityId,pagination,function(resultobjs){
                 res.json(resultobjs);
             });
+        });
+
+    app.route('/clubupdate')
+        .post(function(req,res){
+            let clubId = req.body.clubId;
+            let updateObj = req.body.obj;
+
+            ClubControllers.clubByUpdate(clubId,updateObj,function(result){
+                res.json(result);
+            });
+
         });
 
     app.route('/clubbyid')

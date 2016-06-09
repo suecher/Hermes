@@ -26,6 +26,7 @@ module.exports = function(){
     require('../app/routes/uploadfiles.server.routes')(app);
     require('../app/routes/message.server.routes')(app);
     require('../app/routes/honor.server.routes')(app);
+
     require('../app/routes/level.server.routes')(app);
     require('../app/routes/clubfollow.server.routes')(app);
     require('../app/routes/security.server.routes')(app);
@@ -33,6 +34,7 @@ module.exports = function(){
     require('../app/routes/bowtype.server.routes.js')(app);
     require('../app/routes/advert.server.routes')(app);
     require('../app/routes/challenge.server.routes')(app);
+    require('../app/routes/club.manager.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

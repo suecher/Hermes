@@ -13,10 +13,12 @@ let client = JPush.buildClient('4e574e461ac7fa090024c3da','b98272efe233b07b07690
  * @param (客户端类型android or ios)type
  */
 module.exports = function(receiverId,content){
+
     client.push().setPlatform(JPush.ALL)
         .setAudience(JPush.alias(receiverId))
         .setNotification('Hi, JPush', JPush.ios(content, 'happy.caf', 5))
         .send(function(err, res) {
+
             if (err) {
                 console.log(err.message);
             } else {

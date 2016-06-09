@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/3/8.
  */
-
+"use strict";
 let ClubControllers = require('../controllers/club.server.controller');
 
 module.exports = function(app){

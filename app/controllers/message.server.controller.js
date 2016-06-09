@@ -21,8 +21,6 @@ module.exports = {
             clientMessage.createTime = Date.now();
             let message = Message(clientMessage);
 
-
-
             //判断是否为好友请求消息或对战消息 如果是这两种消息。判断是否存在。。如果已存在。不重复添加
             if(clientMessage.messageType == 4 || clientMessage.messageType == 6){
                 this.messageExist({sendId:clientMessage.sendId,receiveId:clientMessage.receiveId,messageType:clientMessage.messageType},function(resultobj){
@@ -43,8 +41,6 @@ module.exports = {
 
                             callback(resultobjs.createResult(true,'','',message));
 
-
-
                         });
 
                     } else {
@@ -57,6 +53,7 @@ module.exports = {
                         callback(resultobjs.createResult(false,'AddMessageError',err.message));
                         return;
                     }
+                    console.log('触发1')
 
                     if(clientMessage.messageType == 1){
                         push(clientMessage.receiveId,'您收到一条新的留言信息.');
@@ -65,6 +62,7 @@ module.exports = {
                     if(clientMessage.messageType == 2 || clientMessage.messageType == 3){
                         push(clientMessage.receiveId,'您收到一条新的活动信息.');
                     }
+                    console.log('触发2')
 
                     callback(resultobjs.createResult(true,'','',message));
                 });

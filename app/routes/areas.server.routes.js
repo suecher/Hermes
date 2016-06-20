@@ -8,12 +8,12 @@ module.exports = function(app){
     app.route('/areas/province')
         .get(function(req,res){
             res.json(areas.province);
-        })
+        });
 
     app.route('/areas/city')
         .get(function(req,res){
             res.json(areas.city);
-        })
+        });
 
     app.route('/areas/district')
         .get(function(req,res){

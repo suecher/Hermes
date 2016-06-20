@@ -28,6 +28,11 @@ module.exports = {
             callback(resultobj.createResult(false,'Required parameter missing','缺少必要参数,俱乐部的联系方式与密码和姓名'));
         }
     },
+    /**
+     * 俱乐部端的登录
+     * @param clientuser
+     * @param callback
+     */
     login:function(clientuser,callback){
         if(clientuser.username || clientuser.password){
             ClubManager.findOne({username:clientuser.username,password:clientuser.password},function(err,doc){
@@ -37,7 +42,7 @@ module.exports = {
                 }
 
                 if(doc){
-                    callback(resultobj.createResult(true,null,null,{result:true,body:doc}));
+                    callback(resultobj.createResult(true,null,null,doc));
                 } else {
                     callback(resultobj.createResult(false,"DataNotExist","查询的数据不存在,登陆失败"));
                 }

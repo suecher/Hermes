@@ -76,7 +76,7 @@ module.exports = {
                     return;
                 }
 
-                callback(resultobjs.createResult(true,'','',doc));
+                callback(resultobjs.createResult(true,'','',data));
 
             });
         } else {

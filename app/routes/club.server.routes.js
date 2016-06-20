@@ -30,15 +30,24 @@ module.exports = function(app){
 
         });
 
+    /**
+     * 用于管理端根据ID获取俱乐部信息
+     */
     app.route('/clubbyid')
         .post(function(req,res){
+
             var clubId = req.body.clubId;
+            console.log("输出ID");
+            console.log(clubId);
             ClubControllers.clubById(clubId,function(resultobjs){
                 res.json(resultobjs);
             });
         });
 
 
+    /**
+     * 添加俱乐部
+     */
     app.route('/addclub')
         .post(function(req,res,next){
             var clientclub = req.body;
@@ -49,9 +58,6 @@ module.exports = function(app){
 
     app.route('/clubbyname')
         .post(function(req,res){
-
-
-
             ClubControllers.clubByName(req.body.clubName,function(resultobjs){
                 res.json(resultobjs);
             });

@@ -12,11 +12,11 @@ module.exports = function(app){
     app.route('/createmessage')
         .post(function(req,res){
             console.log(req.body);
-            //var clientmessage = req.body;
-            //MessageController.create(clientmessage,function(resultobjs){
-            //    res.json(resultobjs);
-            //});
-            res.json('gaga');
+            var clientmessage = req.body;
+            MessageController.create(clientmessage,function(resultobjs){
+                res.json(resultobjs);
+            });
+            //res.json('gaga');
         });
 
 

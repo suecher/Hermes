@@ -36,9 +36,39 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
         }
     },
+    /**
+     * 用于俱乐部端删除俱乐部图片
+     * @param clubId
+     * @param picId
+     * @param callback
+     */
+    removeClubPic:function(clubId,picId,callback){
+        let clubByUpdate = this.clubByUpdate;
+        if(clubId && picId){
+            this.clubById(clubId,function(result){
+
+                let pictureList = result.body.pictureList.filter(function(item,index){
+
+                    if(item !== picId){
+                        return item;
+                    }
+                });
+
+                result.body.pictureList = pictureList;
+                //console.log(pictureList);
+                //console.log(result.body.pictureList);
+
+
+                clubByUpdate(clubId,result.body,function(result){
+                    callback(resultobjs.createResult(true,null,null,result));
+                });
+            })
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,'));
+        }
+    },
     clubUpdateMemberAndFollow:function(clubId,followSize,memberSize,callback){
         if(clubId) {
-
             Clups.update({_id:clubId},{$inc:{'followSize':followSize,'memberSize':memberSize}},function(err,data){
                 if(err){
                     callback(resultobjs.createResult(false,'UpdateMemberAndFollow',err.message));

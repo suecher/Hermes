@@ -3,15 +3,15 @@
  */
 "use strict";
 let JPush = require('../node_modules/jpush-sdk/lib/JPush/JPush');
-let client = JPush.buildClient('4e574e461ac7fa090024c3da','b98272efe233b07b07690df5');
+let client = JPush.buildClient('0873b8d1c7c5ae16a8d7f842','a74443366ae89412d77a57d0');
 
 /**
  *
- * @param (发送者姓名)sendname
- * @param (接收者ID)receiverId
- * @param (内容)content
- * @param (客户端类型android or ios)type
- */
+* @param (发送者姓名)sendname
+* @param (接收者ID)receiverId
+* @param (内容)content
+* @param (客户端类型android or ios)type
+*/
 module.exports = function(receiverId,content){
 
     client.push().setPlatform(JPush.ALL)

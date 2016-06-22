@@ -11,31 +11,32 @@ var ClubController = require('../controllers/club.server.controller');
 module.exports = function(app){
     app.route('/addscore')
         .post(function(req,res){
+            console.log(req.body);
             ArcheriesScoreController.create(req.body,function(resultobjs){
                 res.json(resultobjs);
             });
         });
 
-    app.route('/addscoreandroid')
-        .post(function(req,res){
-
-            //因android端提交问题.临时解决接口.将android提交上来的archeryList 逗号分隔字符串 转数组.
-            let archeryList = [];
-            if(req.body.archeryList){
-                for(let item in body.archeryList.split(',')){
-                    archeryList.push(parseInt(item));
-                }
-
-                req.body.archeryList = archeryList;
-
-                ArcheriesScoreController.create(req.body,function(resultobjs){
-                    res.json(resultobjs);
-                });
-
-            } else {
-                res.json({result:false,errorType:'archeryList NotExist',errorMessage:'archeryList 参数不存在'});
-            }
-        });
+    //app.route('/addscoreandroid')
+    //    .post(function(req,res){
+    //
+    //        //因android端提交问题.临时解决接口.将android提交上来的archeryList 逗号分隔字符串 转数组.
+    //        let archeryList = [];
+    //        if(req.body.archeryList){
+    //            for(let item in body.archeryList.split(',')){
+    //                archeryList.push(parseInt(item));
+    //            }
+    //
+    //            req.body.archeryList = archeryList;
+    //
+    //            ArcheriesScoreController.create(req.body,function(resultobjs){
+    //                res.json(resultobjs);
+    //            });
+    //
+    //        } else {
+    //            res.json({result:false,errorType:'archeryList NotExist',errorMessage:'archeryList 参数不存在'});
+    //        }
+    //    });
 
     app.route('/scorebyuser')
         .post(function(req,res){
@@ -71,7 +72,14 @@ module.exports = function(app){
      */
     app.route('/sharescore/:id')
         .get(function(req,res){
-            res.send('user:' + req.params.id);
+            res.send('score:' + req.params.id);
+        });
+
+    //temp
+
+    app.route('/report/statistics/:id')
+        .get(function(req,res){
+            res.send('statistics:' + req.params.id);
         });
 
 

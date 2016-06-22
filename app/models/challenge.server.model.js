@@ -14,6 +14,8 @@ let ChallengeSchema = mongoose.Schema({
         arrowType:Number,
         draw:{type:Boolean,default:false},
         finish:{type:Number,default:false},
+        winnerId:String,
+        loserId:String,
         createTime:Date
 });
 

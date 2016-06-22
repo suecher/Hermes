@@ -19,6 +19,7 @@ module.exports = function(app){
             });
         });
 
+
     app.route('/clubupdate')
         .post(function(req,res){
             let clubId = req.body.clubId;
@@ -35,15 +36,25 @@ module.exports = function(app){
      */
     app.route('/clubbyid')
         .post(function(req,res){
-
-            var clubId = req.body.clubId;
-            console.log("输出ID");
-            console.log(clubId);
+            let clubId = req.body.clubId;
             ClubControllers.clubById(clubId,function(resultobjs){
                 res.json(resultobjs);
             });
         });
 
+
+    /**
+     * 用于删除俱乐部的的展示图片
+     */
+    app.route('/removeclubpic')
+        .post(function(req,res){
+            let clubId = req.body.clubId;
+            let picId = req.body.picId;
+
+            ClubControllers.removeClubPic(clubId,picId,function(result){
+                res.json(result);
+            });
+        });
 
     /**
      * 添加俱乐部

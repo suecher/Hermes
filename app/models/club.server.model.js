@@ -29,6 +29,8 @@ var ClupsSchema = new mongoose.Schema({
     parking: Boolean,//是否有停车场
     multipleShopId:String,//连锁店ID
     multipleBit:Boolean,//是否是连锁店
+    saloon:{type:Boolean,default:false},//是否有茶座酒吧等休闲区域
+    coach:{type:Boolean,default:false},//是否提供教练服务
     createdTime: {type: Date, default: Date.now()},//创建时间
     updatedTime: {type: Date, default: Date.now()}//最后更新信息的时间
 });

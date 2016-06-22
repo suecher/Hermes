@@ -18,12 +18,11 @@ var tempfilefloder = "../" + config.tempfolder;
 
 module.exports = {
     create: function(_createscore, callback) {
+        console.log('M3');
         var clientscore =_createscore;
-        console.log(clientscore);
         if(clientscore.userId &&
             clientscore.arrowRoadStandard &&
             clientscore.arrowCount &&
-            clientscore.totalPoint &&
             clientscore.avgeragePoint &&
             clientscore.archeryList &&
             clientscore.clubId &&
@@ -34,7 +33,6 @@ module.exports = {
             //如果是数组的值是字符串。转为数字存储
             clientscore.totalPoint = parseInt(clientscore.totalPoint);
             clientscore.arrowCount = parseInt(clientscore.arrowCount);
-
             var score = ArcheriesScore(clientscore);
             score.isAffirmOver = false;
             score.isAffirm = true;
@@ -57,7 +55,6 @@ module.exports = {
                     UserController.update(user,function(updatescoreresult){
                         //console.log(updatescoreresult);
                     });
-
 
                     score.save(function(err){
                         if(err){

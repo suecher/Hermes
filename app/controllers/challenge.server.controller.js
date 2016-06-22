@@ -98,7 +98,7 @@ module.exports = {
                     callback(resultobj.createResult(false,'UpdateChallengeError','更新对战信息时报错'));
                     return;
                 };
-
+                
                 callback(resultobj.createResult(true,null,null,data));
             });
         } else {

@@ -4,14 +4,22 @@
 "use strict";
 let sms = require('../../config/sms');
 
+let UserController = require('../controllers/user.server.controller');
+
 module.exports = function(app){
 
     let securityManage = require('../../config/securityCodeManage');
     app.route('/createsecurity')
         .post(function(req,res){
             let mobile = req.body.mobile;
-            securityManage.createUserCode(mobile);
-            res.end();
+            UserController.userByMobile(mobile,function(result){
+                if(result.errorType == 'UserNotExist'){
+                    securityManage.createUserCode(mobile);
+                    res.json({result:true,body:'UserNotExist'});
+                } else {
+                    res.json({result:false,body:'UserExist'});
+                }
+            });
         });
 
     app.route('/verification')

@@ -37,7 +37,6 @@ module.exports = {
                     return;
                 }
 
-
                 createuser.createTime = Date.now();
                 var user = User(createuser);
 

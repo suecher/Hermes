@@ -164,5 +164,21 @@ module.exports = {
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
+    },
+
+    //按省份查找俱乐部
+    listByprovince:function(provinceId,callback){
+        if(provinceId){
+            Clups.find({'province':provinceId},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectClubError','按省份名称查询'));
+                    return;
+                }
+                callback(resultobjs.createResult(true,'','',docs));
+            })
+        }
+        else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,俱乐部名称'))
+        }
     }
 };

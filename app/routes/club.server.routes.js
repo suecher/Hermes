@@ -73,4 +73,13 @@ module.exports = function(app){
                 res.json(resultobjs);
             });
         });
+
+    //按省份查找俱乐部
+    app.route('/clubbyprovince')
+        .post(function(req,res,next){
+            var provinceId=req.body.province;
+            ClubControllers.listByprovince(provinceId,function(resultobjs){
+                res.json(resultobjs);
+            });
+        });
 };

@@ -6,7 +6,8 @@
 
 var ArcheriesScoreController = require('../controllers/archeriesscore.server.controller.js');
 var ClubController = require('../controllers/club.server.controller');
-
+let config = require('../../config/config');
+let moment = require('moment');
 
 module.exports = function(app){
     app.route('/addscore')
@@ -72,18 +73,25 @@ module.exports = function(app){
      */
     app.route('/sharescore/:id')
         .get(function(req,res){
-            res.send('score:' + req.params.id);
+            ArcheriesScoreController.scoreById(req.params.id,function(result){
+                if(result.result){
+                    let date = moment(result.body.createTime).year() + "-" + moment(result.body.createTime).month() + "-" +moment(result.body.createTime).day();
+
+                    res.redirect(config.webapp + "/sharescore?avgeragePoint="+result.body.avgeragePoint+"&&arrowRoadStandard="+result.body.arrowRoadStandard+"&&arrowCount="+result.body.arrowCount+"&&date="+date+"&&pic="+result.body.picture+"&&totalPoint="+result.body.totalPoint);
+                } else {
+                    res.json(result);
+
+                }
+            });
         });
 
-    //temp
-
+    /**
+     * 用于统计用户数据 呈现图标
+     */
     app.route('/report/statistics/:id')
         .get(function(req,res){
             res.send('statistics:' + req.params.id);
         });
-
-
-
 
     app.route('/rankingbycity')
         .post(function(req,res){

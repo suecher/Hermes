@@ -75,9 +75,9 @@ module.exports = function(app){
         .get(function(req,res){
             ArcheriesScoreController.scoreById(req.params.id,function(result){
                 if(result.result){
-                    let date = moment(result.body.createTime).year() + "-" + moment(result.body.createTime).month() + "-" +moment(result.body.createTime).day();
+                    let date = moment(result.body[0].createTime).year() + "-" + moment(result.body[0].createTime).month() + "-" +moment(result.body[0].createTime).day();
 
-                    res.redirect(config.webapp + "/sharescore?avgeragePoint="+result.body.avgeragePoint+"&&arrowRoadStandard="+result.body.arrowRoadStandard+"&&arrowCount="+result.body.arrowCount+"&&date="+date+"&&pic="+result.body.picture+"&&totalPoint="+result.body.totalPoint);
+                    res.redirect(config.webapp + "/sharescore?avgeragePoint="+result.body[0].avgeragePoint+"&&arrowRoadStandard="+result.body[0].arrowRoadStandard+"&&arrowCount="+result.body[0].arrowCount+"&&date="+date+"&&pic="+result.body[0].picture+"&&totalPoint="+result.body[0].totalPoint);
                 } else {
                     res.json(result);
 

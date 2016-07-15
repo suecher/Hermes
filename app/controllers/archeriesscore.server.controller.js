@@ -8,6 +8,7 @@ var ArcheriesScore = mongoose.model("ArcheriesScore");
 var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
 var fs = require('fs');
+var _ = require('lodash');
 
 var config = require('../../config/config');
 
@@ -135,6 +136,38 @@ module.exports = {
             callback(resultobjs.createResult(false,'UserIdNotExist','缺少参数.,用户ID不存在'));
         }
     },
+    /***
+     * 用于统计用户所有箭的环数统计
+     * @param userId
+     * @param callback
+     */
+    scoreByPoint:function(userId,callback){
+        if(userId){
+            ArcheriesScore.find({userId:userId},function(err,docs){
+                if(err){
+                    callback(resultobjs.createResult(false,'SelectScoreError',err.message));
+                    return;
+                }
+
+                let pointlist = [];
+                for(let value of docs){
+                    for(let point of value.archeryList){
+                        pointlist.push(point);
+                    }
+                }
+
+                let pointobj = _.groupBy(pointlist, function(n) {
+                    return n;
+                });
+
+                callback(resultobjs.createResult(true,null,null,pointobj));
+
+            })
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息'));
+        }
+    }
+    ,
     scoreByUserAndDate:function(userId,startdate,enddate,callback){
         if(userId && startdate && enddate){
 
@@ -225,6 +258,5 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,clubId or arrowRoad or arrowCount'));
         }
     }
-
 
 };

@@ -142,7 +142,6 @@ module.exports = {
                 } else {
                     callback(resultobjs.createResult(false,'UserNotExist','用户不存在'));
                 }
-
             })
 
         }

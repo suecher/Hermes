@@ -73,6 +73,7 @@ module.exports = function(app){
      */
     app.route('/sharescore/:id')
         .get(function(req,res){
+
             ArcheriesScoreController.scoreById(req.params.id,function(result){
                 if(result.result){
                     let date = moment(result.body.createTime).year() + "-" + moment(result.body.createTime).month() + "-" +moment(result.body.createTime).day();
@@ -128,14 +129,19 @@ module.exports = function(app){
             }
         });
 
+
+    app.route('/pointgroup')
+        .post(function(req,res){
+            let userId = req.body.userId;
+            ArcheriesScoreController.scoreByPoint(userId,function(resultobj){
+                res.send(resultobj);
+            });
+        });
+
     app.route('/scorebyId')     //根据成绩id获取成绩
         .post(function(req,res){
             ArcheriesScoreController.scoreById(req.body. id,function(resultobjs){
                 res.send(resultobjs);
             });
         });
-
-
-
-
 };

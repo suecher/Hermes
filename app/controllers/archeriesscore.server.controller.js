@@ -210,6 +210,10 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,userId'));
         }
     },
+    //统计用户的所有箭的环数
+    scoreByuserIdPoint:function(userId,callback){
+
+    },
     scoreByClubRank:function(clubrank,callback){
         if(clubrank.clubIdList &&
             clubrank.arrowRoad &&

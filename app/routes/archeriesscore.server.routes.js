@@ -134,7 +134,7 @@ module.exports = function(app){
         .post(function(req,res){
             let userId = req.body.userId;
             ArcheriesScoreController.scoreByPoint(userId,function(resultobj){
-                res.send(resultobj);
+                res.send(resultobj.body);
             });
         });
 

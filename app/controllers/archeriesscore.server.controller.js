@@ -150,11 +150,14 @@ module.exports = {
                 }
 
                 let pointlist = [];
+
                 for(let value of docs){
                     for(let point of value.archeryList){
                         pointlist.push(point);
                     }
+
                 }
+
 
                 let pointobj = _.groupBy(pointlist, function(n) {
                     return n;

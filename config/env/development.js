@@ -3,10 +3,10 @@
 */
 module.exports = {
     port:7105,
-    mongodb:'mongodb://192.168.1.254/hermes',
+    mongodb:'mongodb://192.168.31.131/hermes',
     usersPicture:'/public/files/users/',
     clubsPicture:'/public/files/clubs/',
     tempfolder:'/public/files/temp/',
-    webapp:"http://192.168.1.254:7108",
+    webapp:"http://192.168.31.131:7108",
     coefficient:0.02
 };

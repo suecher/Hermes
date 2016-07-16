@@ -9,6 +9,7 @@ var UserController = require('../controllers/user.server.controller');
 var resultobjs = require('../models/result.server.model');
 var fs = require('fs');
 var _ = require('lodash');
+var moment = require('moment');
 
 var config = require('../../config/config');
 
@@ -169,8 +170,35 @@ module.exports = {
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息'));
         }
-    }
-    ,
+    },
+    /**
+     * 成绩活跃度
+     * @param userId
+     * @param callback
+     */
+    scoreByActivity:function(userId,startdate,enddate,callback){
+        ArcheriesScore.find({
+                "userId":userId,
+                "createTime":{
+                    "$gte": new Date(startdate),
+                    "$lt":new Date(enddate)}},function(err,scorelist) {
+            if (err) {
+                callback(resultobjs.createResult(false, 'SelectScoreByUserInfoError', err.message));
+            }
+
+
+            console.log(scorelist);
+
+            let scoremonth = _.groupBy(scorelist,function(n){
+                return moment(n.createTime).month();
+            });
+
+            callback(scoremonth);
+        });
+
+
+
+    },
     scoreByUserAndDate:function(userId,startdate,enddate,callback){
         if(userId && startdate && enddate){
 
@@ -183,7 +211,6 @@ module.exports = {
                 if(err){
                     callback(resultobjs.createResult(false,'SelectScoreByUserInfoError',err.message));
                 }
-
 
                 //格式化对象 计算最终的数据
                 let scorelistobj = {};

@@ -141,17 +141,18 @@ module.exports = function(app){
             });
         });
 
-    app.route('/activity')
+    //用户活跃度接口 用于统计部分
+    app.route('/useractivity')
         .post(function(req,res){
             let begindate = req.body.begindate;
             let enddate = req.body.enddate;
             let userId = req.body.userId;
 
-            ArcheriesScoreController.scoreByDateCount(userId,function(resultobj){
-                res.send(resultobj.body);
+            ArcheriesScoreController.scoreByActivity(userId,"2016-01-01","2016-12-31",function(resultobj){
+                res.json(resultobj);
             });
 
-            res.json();
+
         });
 
     app.route('/scorebyId')     //根据成绩id获取成绩

@@ -130,12 +130,28 @@ module.exports = function(app){
         });
 
 
+    /**
+     * 用于统计用户的环数总数.统计部分
+     */
     app.route('/pointgroup')
         .post(function(req,res){
             let userId = req.body.userId;
             ArcheriesScoreController.scoreByPoint(userId,function(resultobj){
                 res.send(resultobj.body);
             });
+        });
+
+    app.route('/activity')
+        .post(function(req,res){
+            let begindate = req.body.begindate;
+            let enddate = req.body.enddate;
+            let userId = req.body.userId;
+
+            ArcheriesScoreController.scoreByDateCount(userId,function(resultobj){
+                res.send(resultobj.body);
+            });
+
+            res.json();
         });
 
     app.route('/scorebyId')     //根据成绩id获取成绩

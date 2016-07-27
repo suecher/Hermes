@@ -28,7 +28,6 @@ module.exports = {
             clientscore.avgeragePoint &&
             clientscore.archeryList &&
             clientscore.clubId &&
-            clientscore.picture &&
             clientscore.bowType){
 
 

@@ -38,7 +38,8 @@ var UserSchema = new mongoose.Schema({
     defaultArrowRoad:{type:Number,default:12},//默认使用的箭道长度
     lastArcheryTime:{type:Date,default:Date.now()},//最后一次射箭的时间(记录成绩的时间)
     createTime:{type:Date,default:Date.now()},//创建用户的时间
-    updateLast:{type:Date,deault:Date.now()}//最后更新资料的时间
+    updateLast:{type:Date,deault:Date.now()},//最后更新资料的时间
+    scoringType:Number  //计分类型1为拍照计分2为落点计分
 });
 
 var User = mongoose.model('User',UserSchema);

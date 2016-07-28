@@ -79,7 +79,7 @@ module.exports = function(app){
                     if(result.body.length > 0){
                         let date = moment(result.body[0].createTime).format("YYYY-MM-DD");
                         let avgeragePoint = Math.round(result.body[0].avgeragePoint*100)/100;
-                        res.redirect(config.webapp + "/sharescore?userId="+result.body[0].userId+"&&avgeragePoint="+result.body[0].avgeragePoint+"&&arrowRoadStandard="+result.body[0].arrowRoadStandard+"&&arrowCount="+result.body[0].arrowCount+"&&date="+date+"&&pic="+result.body[0].picture+"&&totalPoint="+result.body[0].totalPoint);
+                        res.redirect(config.webapp + "/sharescore?userId="+result.body[0].userId+"&&avgeragePoint="+avgeragePoint+"&&arrowRoadStandard="+result.body[0].arrowRoadStandard+"&&arrowCount="+result.body[0].arrowCount+"&&date="+date+"&&pic="+result.body[0].picture+"&&totalPoint="+result.body[0].totalPoint);
                     } else {
                         res.json({"error":"成绩不存在"});
                     }

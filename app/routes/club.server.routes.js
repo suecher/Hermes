@@ -16,28 +16,42 @@ module.exports = function(app){
             var pagination = req.body.pagination;
             ClubControllers.listByCity(cityId,pagination,function(resultobjs){
 
-                resultobjs.body.push({
-                    "_id" : "000000000000000000000001",
-                    "name" : "靶心训练营",
-                    "logo" : "",
-                    "pictureList" : [],
-                    "address" : "湖南靶心科技",
-                    "province" : 0,
-                    "city" : 0,
-                    "district" : 0,
-                    "summary" : "",
-                    "phone" : "",
-                    "cphone" : "",
-                    "cperson" : "",
-                    "houseSize" : 120,
-                    "arrowRoadSize" : 7,
-                    "wifi" : 1,
-                    "parking" : 1,
-                    "followSize" : 0,
-                    "memberSize" : 0
+                ClubControllers.clubBaxin(function(baxin){
+
+                    if(pagination.pageNo == 1){
+                        resultobjs.body.push(baxin);
+
+                    }
+
+                    res.json(resultobjs);
+
                 });
 
-                res.json(resultobjs);
+                //console.log(req.body.pagination);
+                //if(pagination.pageNo == 1){
+                //    resultobjs.body.push({
+                //        "_id" : "000000000000000000000001",
+                //        "name" : "靶心训练营",
+                //        "logo" : "",
+                //        "pictureList" : [],
+                //        "address" : "湖南靶心科技",
+                //        "province" : 0,
+                //        "city" : 0,
+                //        "district" : 0,
+                //        "summary" : "",
+                //        "phone" : "",
+                //        "cphone" : "",
+                //        "cperson" : "",
+                //        "houseSize" : 120,
+                //        "arrowRoadSize" : 7,
+                //        "wifi" : 1,
+                //        "parking" : 1,
+                //        "followSize" : 0,
+                //        "memberSize" : 0
+                //    });
+                //}
+
+
             });
         });
 

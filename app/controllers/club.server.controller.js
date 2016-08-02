@@ -137,6 +137,18 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
     },
+    /***
+     * 用户返回 靶心训练营 虚拟俱乐部
+     */
+    clubBaxin:function(callback){
+        Clups.findOne({city:0,province:0},function(err,doc){
+            if(err){
+                console.log('获取靶心俱乐部错误');
+                return;
+            }
+            callback(doc);
+        });
+    },
     clubByName:function(clubName,callback){
         if(clubName){
             Clups.find({name:{$regex:clubName}},function(err,docs){

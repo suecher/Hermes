@@ -35,6 +35,7 @@ module.exports = function(){
     require('../app/routes/advert.server.routes')(app);
     require('../app/routes/challenge.server.routes')(app);
     require('../app/routes/club.manager.server.routes')(app);
+    require('../app/routes/version.server.routes')(app);
 
     app.use(function(req,res,next){
         res.status(404);

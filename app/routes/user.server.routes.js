@@ -73,8 +73,45 @@ module.exports = function(app){
             });
         });
 
-    app.route('/userfriends')
-        .post(UserController.list);
 
 
+    app.route('/luckyuser')
+        .get(function(req,res){
+            var count = req.query.count;
+
+            UserController.list(function(result){
+                var userlist = result.body;
+
+
+
+                var luckylist = [];
+                var exits = [];
+                for(var i=0;i<count;i++){
+
+
+
+                    var r = RandomNum(0,userlist.length);
+
+
+                    exits.push(r);
+
+                    luckylist.push(userlist[r]);
+                }
+
+                console.log(exits);
+
+                res.send(luckylist);
+            });
+
+
+
+
+        });
+
+    function RandomNum(Min,Max){
+        var Range = Max - Min;
+        var Rand = Math.random();
+        var num = Min + Math.round(Rand * Range);
+        return num;
+    }
 };

@@ -203,6 +203,7 @@ module.exports = {
 
 
             ArcheriesScore.find({
+
                 "userId":userId,
                 "createTime":{
                     "$gte": new Date(startdate),

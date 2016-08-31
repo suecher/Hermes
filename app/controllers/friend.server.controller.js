@@ -73,8 +73,6 @@ module.exports = {
                                 callback(resultobjs.createResult(true,'','',clientFriend));
                             };
                         });
-
-
                     }
                 });
 

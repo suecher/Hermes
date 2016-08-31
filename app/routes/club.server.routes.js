@@ -11,9 +11,9 @@ module.exports = function(app){
         });
 
     app.route('/clubbycity')
-        .post(function(req,res,next){
-            var cityId =req.body.cityId;
-            var pagination = req.body.pagination;
+        .post(function(req,res){
+            let cityId =req.body.cityId;
+            let pagination = req.body.pagination;
             ClubControllers.listByCity(cityId,pagination,function(resultobjs){
                 ClubControllers.clubBaxin(function(baxin){
 
@@ -30,7 +30,6 @@ module.exports = function(app){
                     res.json(resultobjs);
 
                 });
-
             });
         });
 
@@ -42,7 +41,6 @@ module.exports = function(app){
             ClubControllers.clubByUpdate(clubId,updateObj,function(result){
                 res.json(result);
             });
-
         });
 
     /**
@@ -90,10 +88,30 @@ module.exports = function(app){
 
     //按省份查找俱乐部
     app.route('/clubbyprovince')
-        .post(function(req,res,next){
+        .post(function(req,res){
             var provinceId=req.body.province;
-            ClubControllers.listByprovince(provinceId,function(resultobjs){
-                res.json(resultobjs);
+
+
+            let pagination = req.body.pagination;
+
+            ClubControllers.listByprovince(provinceId,pagination,function(resultobjs){
+
+
+                ClubControllers.clubBaxin(function(baxin){
+
+                    if(!pagination){
+                        pagination = {};
+                        pagination.pageNo = 1;
+                        pagination.numPerPage = 10;
+                    }
+
+                    if(pagination.pageNo == 1){
+                        resultobjs.body.push(baxin);
+
+                    }
+                    res.json(resultobjs);
+
+                });
             });
         });
 };

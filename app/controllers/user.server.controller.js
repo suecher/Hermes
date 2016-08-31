@@ -272,8 +272,14 @@ module.exports = {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少用户ID'));
         }
     },
-    list:function(req,res){
-        console.log(req.body);
-        res.send('success');
+    list:function(callback){
+        User.find({},function(err,docs){
+            if(err){
+                callback(resultobjs.createResult(false, 'GetUserError', err.message));
+                return;
+            }
+
+            callback(resultobjs.createResult(true,null,null,docs));
+        })
     }
 };

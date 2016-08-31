@@ -14,4 +14,16 @@ module.exports = function(app){
                 res.json(result);
             });
         });
+
+    app.route('/UpdataClubPassword')
+        .post(function(req,res){
+            var clubId = req.body.clubId;
+            var password = req.body.password;
+            var newpassword = req.body.newpassword;
+            ClubManagerController.updataPassword(clubId,password,newpassword,function(result){
+                res.json(result);
+            })
+        });
+
+
 };

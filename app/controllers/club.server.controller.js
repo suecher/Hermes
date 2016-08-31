@@ -179,18 +179,29 @@ module.exports = {
     },
 
     //按省份查找俱乐部
-    listByprovince:function(provinceId,callback){
-        if(provinceId){
-            Clups.find({'province':provinceId},function(err,docs){
-                if(err){
-                    callback(resultobjs.createResult(false,'SelectClubError','按省份名称查询'));
-                    return;
-                }
-                callback(resultobjs.createResult(true,'','',docs));
-            })
+    listByprovince:function(provinceId,pagination,callback){
+
+        var pagesize = 10;
+        var pagestart = 1;
+
+        if(pagination){
+            pagesize =  parseInt(pagination.numPerPage,10) || 10;
+            pagestart = parseInt(pagination.pageNo,10) || 1;
         }
-        else {
-            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,俱乐部名称'))
+
+
+        if(provinceId){
+            Clups.find({'province':provinceId})
+                .skip((pagestart - 1) * pagesize)
+                .limit(pagesize)
+                .exec(function(err,docs){
+                    if(err) return callback(resultobjs.createResult(false,'Select club error',err.message));
+
+                    callback(resultobjs.createResult(true,'','',docs));
+                });
+
+        } else {
+            callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }
     }
 };

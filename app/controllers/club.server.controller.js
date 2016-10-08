@@ -184,22 +184,24 @@ module.exports = {
         var pagesize = 10;
         var pagestart = 1;
 
-        if(pagination){
-            pagesize =  parseInt(pagination.numPerPage,10) || 10;
-            pagestart = parseInt(pagination.pageNo,10) || 1;
-        }
+        // if(pagination){
+        //     pagesize =  parseInt(pagination.numPerPage,10) || 10;
+        //     pagestart = parseInt(pagination.pageNo,10) || 1;
+        // }
 
 
         if(provinceId){
             Clups.find({'province':provinceId})
-                .skip((pagestart - 1) * pagesize)
-                .limit(pagesize)
+                .skip((pagestart -1 ) * pagesize)
+
+
+
+              //  .limit(pagesize)
                 .exec(function(err,docs){
                     if(err) return callback(resultobjs.createResult(false,'Select club error',err.message));
 
                     callback(resultobjs.createResult(true,'','',docs));
                 });
-
         } else {
             callback(resultobjs.createResult(false,'Required parameter missing','缺少必要信息,城市ID'));
         }

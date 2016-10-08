@@ -99,16 +99,16 @@ module.exports = function(app){
 
                 ClubControllers.clubBaxin(function(baxin){
 
-                    if(!pagination){
-                        pagination = {};
-                        pagination.pageNo = 1;
-                        pagination.numPerPage = 10;
-                    }
-
-                    if(pagination.pageNo == 1){
-                        resultobjs.body.push(baxin);
-
-                    }
+                    // if(!pagination){
+                    //     pagination = {};
+                    //     pagination.pageNo = 1;
+                    //     pagination.numPerPage = 10;
+                    // }
+                    //
+                    // if(pagination.pageNo == 1){
+                    //     resultobjs.body.push(baxin);
+                    //
+                    // }
                     res.json(resultobjs);
 
                 });
